@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>扩展 new运算的替代方法</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+</head>
+
+<body>
+    <script>
+        // constructor 属性专门为 function 而设计的,
+        //  存在于每一个 function 的prototype属性中
+        //  constructor 指向function 的一个引用
+        function F() {}
+        // 构造函数创建对象的时候,对象的实例会自动保存一个 
+        //      指向其构造函数的prototype对象的一个属性 proto
+        var f = new F();
+        console.log(F.prototype);
+        console.log(F.prototype.constructor);
+        console.log(f);
+        console.log(Array.constructor);
+        console.log(Array.prototype.constructor)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> js 函数</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+</head>
+
+<body>
+
+
+
+
+    <!-- 
+        1.函数定义的三种方法： 
+            a. function 语句。 以命令的形式构造一个函数对象
+                    例子：
+                    function f(){}    或  function(){}  （匿名函数）
+            b. 构造函数 （不是特常用）  解析函数体，动态创建一个新的函数对象
+                    例子：
+                    var fun = new Function(p1,p2,……,pn,body);
+                        p 是参数列表，body表示函数的函数结构体语句
+                        p1 不仅能代表一个参数，也可以是以逗号隔开的参数列表
+                        以下是等价的
+                        Function("a","b","c","return a+b+c")
+                        Function("a,b,c","return a+b+c")
+                        Function("a,b","c","return a+b+c")
+            c. 函数直接量, 也为  匿名函数。  以表达式的形式构造一个函数对象
+                 匿名函数就是一个表达式，即函数表达式，而不是 函数结构的语句 
+                  例子：
+                    function (a,b) { return a+b ;};
+
+                    (function (a,b) { return a+b ;})(1,2);
+                    (1,2) 是实参列表，小括号 表示 ：该函数立即执行
+        2.使用参数
+            (function (a,b){
+                alert(a);
+                alert(b);
+            })(1,2);
+            a.  实参 多于 形参,去前面符合的，多的实参忽略掉
+            b.  形参 多于 实参，多的形参的值默认为 undefined
+            c.  arguments 可以获取实参，且在函数体内使用。
+                 argumnets.length           获取函数实参个数
+                 argumnets.callee.length    获取函数形参个数
+                 （解释：如果不是匿名函数 argumnets.callee 相当于 函数名，
+                        且 argumnets.callee(2,3) ,即使用函数 ）
+            d. 如果函数参数个数不确定，或者函数参数个数很多
+                    可以使用 arguments 获取实参
+            e. argumnets 对象不是数组，含有 length 属性，没有数组的 push 、pop、splice等方法
+        3. 自定义属性
+            a. 作为对象，可以通过点语法为函数定义静态属性或方法
+            b. 函数外定义的属性可以随时访问，但是在函数内定义的属性只有函数被调用后才可以访问
+                例子：
+                    
+
+
+
+
+
+
+     -->
+
+    <script>
+        // function f() {
+        //     // 当在函数内使用 点 时， 即定义了属性，且未被初始化
+        //     f.x = 1;
+        //     alert(f.x);
+        //     alert(f.y);
+        // }
+        // f.y = 2;
+        // alert(f.x); //  返回    undefined
+        // alert(f.y); //  返回    2
+        // f();
+        // alert(f.x); //  返回    1
+
+
+
+
+        // function f(x, y) {
+        //     return function() {
+        //         return x * y
+        //     }
+        // }
+
+        // function a() {
+        //     var num = 100;
+
+        //     function b() {
+        //         num++;
+        //         console.log(num);
+        //     }
+        //     num = 1;
+        //     return b;
+        // }
+        // var demo = a();
+        // demo();
+        // demo();
+
+        //alert(f(8, 7)); // 返回：function(){ return x*y }
+        //  只是返回一个 函数直接量，且 函数直接量  并没有执行
+        //alert(f(8, 7)()); // 返回： 56
+
+
+        //  使用 apply() 方法循环更改当前的 this 指针，
+        //      从而实现更改函数结构
+        // **********************************************
+        // function r(x) {
+        //     return (x);
+        // }
+
+        // function f(x) {
+        //     x[0] = x[0] + ">";
+        //     return x;
+        // }
+        // function o() {
+        //     var temp = r;
+        //     r = function() {
+        //         return temp.apply(this, f(arguments));
+        //         //  重点在 >>>> temp.apply(this,f(arguments));
+        //         //  temp  = oldr(即之前的 r 函数);
+        //         //  f(arguments)  把传过来的 参数 加上 ">"
+        //             //  每次 实参传至 temp 之前 都要进行 f 函数（即在实参后面加 ">"）
+        //             //      而只有当 temp(){}  = (x){return x} 结束
+        //             //      因为之前的 temp(x){} = (){temp.apply   f(arguments)}
+        //             //              还要执行  f()函数  改变实参
+        //         //  1.temp = (-){ return f("=")};  
+        //         //  2. f 将 "=" >> "=>" >> 实参="=>" ,
+        //         //      temp = ("=>"){ return temp(){}    f("=>")}
+        //     }
+        // }
+        // function a() {
+        //     o();
+        //     alert(r("="));
+        // }
+        // for (var i = 0; i < 10; i++) {
+        //     a();
+        // }
+        // ***************************************
+
+
+
+        // *****************************************
+        //     bind()   用来把函数绑定到指定的对象上
+        //      例子:
+        var check = function(value) {
+            if (typeof value !== 'number') {
+                return false;
+            } else {
+                return value >= this.minimum && value <= this.maxmum;
+                //  只要被绑定的对象中 含有 minimum maxmum ;
+            }
+        }
+        var range = {
+            minimum: 10,
+            maxmum: 20
+        };
+        var boundCheck = check.bind(range); //将函数 check 绑定到 range上
+        var result = boundCheck(12); // result >>>> true
+
+        // ECMAScript 为 String 新增了 trim 方法,
+        //  该方法可以从字符串中移除 前导空格 尾随空格 和行终止符,且不修改该字符串
+        //  stringObj.trim()    (stringObj 是String对象 或 字符串)
+        //  移除的字符包括 空格 制表符 换页符 回车符 换行符
+
+
+        //  扩展 new 运算符的替代方法
+        function instanceFrom(f) {
+            var a = [].slice.call(arguments, 1); // 获取构造函数的参数
+            f.prototype.constructor = f; //  手工设置构造函数的原型构造器
+            f.apply(f.prototype, a);
+            //  在原型上强制指定构造函数，则原型对象就成为了构造函数的实例，
+            // 同时由于它的实例的构造器已经被设置为了构造函数，则此时原型对象就相当于
+            //  一个构造函数的实例对象
+            return f.prototype;
+        }
+        //  演示上述例子：
+        function F() {
+            this.name = "F";
+        }
+        var ff = instanceFrom(F);
+        console.log(f.name); // output     F
+    </script>
+</body>
+
+</html>

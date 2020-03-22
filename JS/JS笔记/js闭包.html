@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>js 闭包初认识</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+</head>
+
+<body>
+    <script>
+        // 1.什么是 闭包
+        //     官方解释:一个拥有许多变量和绑定了这些变量的环境表达式(通常是一个函数)
+        //         特点:    a.作为一个函数变量的一个引用,当函数返回时,其处于激活状态
+        //                  b. 一个闭包就是当一个函数返回时,一个没有释放资源的栈区
+        //      当其中一个这样的内部函数在包含他们的外部函数之外被调用时,就会形成闭包
+        // 2.闭包的几种写法
+        function Cir(r) {
+            this.r = r;
+        }
+        var jac = function() {};
+        // jac 继承  Cir
+        jac.prototype = new Cir(5);
+        jac.prototype.Say = function() {
+            console.log("Say");
+        }
+        var jacb = new jac();
+
+
+        console.log("Cir.prototype");
+        console.log(Cir.prototype);
+        console.log("Cir.constructor");
+        console.log(Cir.constructor);
+        console.log("jac.prototype");
+        console.log(jac.prototype);
+        console.log("jacb");
+        console.log(jacb);
+        // 给函数添加属性
+        Cir.PI = 3.1415926;
+        Cir.prototype.area = function() {
+            return Cir.PI * this.r * this.r;
+        }
+        var c = new Cir(2.0);
+        console.log("Cir.prototype");
+        console.log(Cir.prototype);
+        console.log("Cir.constructor");
+        console.log(Cir.constructor);
+        console.log("c");
+        console.log(c);
+        console.log("c");
+        console.log(c._proto_);
+        // alert(c.area());
+    </script>
+</body>
+
+</html>

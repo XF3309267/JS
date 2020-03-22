@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> js 逻辑运算符 </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+</head>
+
+<body>
+    <!-- 
+            在此先讲一下  余数运算（模运算）
+            特殊运算数的运算
+            var n = 5;
+            alert(Infinity % n);    返回    NaN
+                  5 % Infinity      返回    5
+                  3 % 5             返回    5
+                  0 % 5    >>>>>>   返回    0
+                  5 % 0    >>>>>>   返回    NaN 
+                   
+         -->
+    <script>
+        //  逻辑运算
+        //  与  或  非 
+        //  1.逻辑与 的 if 使用
+        //  如：  var user；
+        //        ( !user && alert("没有赋值"));
+        //  2.逻辑与 运算的返回值类型
+        //      typeof({} && false)     返回 boolean  类型
+        //      typeof(true && {})      返回 object   类型
+        //              null    是   object 类型
+        //              NaN     是   number 类型
+        //              Infinity    是  number  类型
+        //              undefined 或  "undefined"   返回    undefined   
+
+        var x = 1;
+        console.log(" typeof(false||{} ) =" + typeof(false || {}));
+        console.log(" typeof('null' && null) =" + typeof('NaN' && NaN));
+
+
+        //  举例  ：  逻辑与 类似与  if
+        var a = b = 2;
+        if (a) {
+            while (b++ < 10) {
+                alert(b++);
+            }
+        }
+        //  可以简化为  
+        while (a && b++ < 10) {
+            alert(b++);
+        }
+        //   将上面的简化例子  转化为如下，就不行
+        //      因为 当一开始 a 就为false，b 是不会 自加的，更不会取判断是否小于十
+        while (b++ < 10) {
+            if (a) {
+                alert(b++);
+            }
+        }
+    </script>
+</body>
+
+</html>

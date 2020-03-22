@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- 
+        思路不够清晰！！！！！！！！！！！！！
+     -->
+
+
+    <title>图片赖加载练习</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <style>
+        .showBox {
+            width: 490px;
+            height: 170px;
+            /* margin: 20px auto; */
+            text-align: center;
+        }
+        
+        .bottom {
+            height: 20px;
+            background-color: red;
+            overflow: hidden;
+        }
+        
+        img {
+            height: 170px;
+            /* width: 490px; */
+            /* margin-left: auto;
+            margin-right: auto; */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="showBox">
+        <img src="images/loading.gif" data-src="images/01.jpg" alt="图片">
+        <img src="images/loading.gif" data-src="images/02.jpg" alt="图片">
+        <img src="images/loading.gif" data-src="images/03.jpg" alt="图片">
+        <img src="images/loading.gif" data-src="images/04.jpg" alt="图片">
+        <img src="images/loading.gif" data-src="images/05.jpg" alt="图片">
+        <img src="images/loading.gif" data-src="images/06.jpg" alt="图片">
+        <img src="images/loading.gif" data-src="images/07.jpg" alt="图片">
+        <img src="images/loading.gif" data-src="images/08.jpg" alt="图片">
+        <img src="images/loading.gif" data-src="images/09.jpg" alt="图片">
+        <img src="images/loading.gif" data-src="images/10.jpg" alt="图片">
+        <img src="images/loading.gif" data-src="images/03.jpg" alt="图片">
+        <img src="images/loading.gif" data-src="images/04.jpg" alt="图片">
+        <img src="images/loading.gif" data-src="images/06.jpg" alt="图片">
+    </div>
+
+    <script>
+        var imgs = document.getElementsByTagName('img');
+        var divList = document.querySelectorAll('.box');
+        var div = divList[0];
+        var n = 0; // 记录已完成第几个图片的加载（ 以 0 开始）
+
+        function getCurrentStyle(obj, attr) {
+            if (window.getComputedStyle) {
+                return window.getComputedStyle(obj, null)[attr];
+            }
+            return obj.currentStyle[attr];
+
+        }
+
+        function getTop(e) {
+            var T = e.offsetTop;
+            while (e = e.offsetParent) {
+
+
+                T += e.offsetTop;
+                // console.log("while T = " + T);
+            }
+            return T;
+        }
+
+        function throttle(fn, delay, atleast) {
+            var timeout = null,
+                startTime = new Date();
+            return function() {
+                var curTime = new Date();
+                clearTimeout(timeout);
+                if (curTime - startTime >= atleast) {
+                    fn();
+                    startTime = curTime;
+                } else {
+                    timeout = setTimeout(fn, delay);
+                }
+            }
+        }
+
+        function loadImages() {
+            console.log("执行  loadImages  ");
+            var imgs = document.getElementsByTagName('img');
+            // var H = document.documentElement.clientHeight;
+            var H = window.innerHeight;
+
+            var S = document.documentElement.scrollTop || document.body.scrollTop;
+            // console.log("H = " + H);
+
+            for (var i = n; i < imgs.length; i++) {
+                console.log("n = " + n);
+                //console.log("imgs[i] = " + getTop(imgs[i]) + "   i=" + (i + 1));
+                var ob = imgs[i];
+                console.log(" ob.offsetTop = " + ob.offsetTop);
+                var T = imgs[i].offsetTop;
+                console.log(" imgs[7].top = " + imgs[8].offsetTop);
+                // console.log("");
+                while (ob = ob.offsetParent) {
+                    // console.log("aaa");
+                    T += ob.offsetTop;
+                    console.log("while T = " + T);
+                }
+                console.log("S+H = " + (S + H));
+                if (H + S > T) {
+                    console.log("大于  i=" + i);
+                    (function(ind) {
+                        console.log(">>>>>>>>>>>>进入 pic 函数");
+                        pic(ind);
+                    })(i);
+
+                    imgs[i].src = imgs[i].getAttribute('data-src');
+
+                    n += 1;
+                }
+            }
+        }
+
+        function pic(i) {
+
+            var frist = $("img").eq(i);
+            // alert("functio pic  frist = "+frist.length);
+
+            // alert("***********imgList.length = " + imgList.length);
+            // while (frist&&(i!=13)) {
+            console.log("+++++++++ frist.attr('src') = " + frist.attr('src'));
+            if (frist.attr("src") != "images/girl1.jpg") {
+                console.log("***************************frist.attr('src')=" + frist.attr("src") + "  i=" + i);
+                // alert("jQuery>>>>>>>>");
+                frist.animate({
+                    opacity: '0.3',
+                    boxShadow: '2px 4px 6px #000',
+                    height: '85%',
+                }, 200);
+
+                frist.animate({
+                    opacity: '0.5',
+                    boxShadow: '2px 4px 6px #000',
+                    height: '90%',
+                }, 200);
+                frist.animate({
+                    opacity: '0.7',
+                    boxShadow: '2px 4px 6px #000',
+                    height: '95%',
+                }, 200);
+                frist.animate({
+                    opacity: '1',
+                    boxShadow: '2px 4px 6px #000',
+                    height: '100%',
+                }, 200);
+
+            }
+        }
+        loadImages();
+        window.addEventListener('scroll', throttle(loadImages, 50, 100), false);
+
+        // console.log("原生方法 IE9+ window.innerheight = " + window.innerheight);
+        // console.log("标准浏览器及低版本标准模式  document.documentElement.clientHeight = " + document.documentElement.clientHeight);
+        // console.log("低版本混杂模式 document.body.clientHeight = " + document.body.clientHeight);
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>js File操作</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+</head>
+
+<body>
+    <input type="file" onchange="fileshow(this)" />
+    <script>
+        // FileList     用户选择的文件列表，即用户选择的所有文件
+        // file         表示 file 控件内每一个被选择的文件对象
+        // var inp = document.getElementById()
+
+
+        function fileshow(obj) {
+            var fileList = obj.files; // 返回Filelist
+            for (let i = 0; i < fileList.length; i++) {
+                const element = fileList[i];
+                console.log("i = " + i + ", element.name = " + element.name); // 文件名
+                // lastModifileDate 文件最后修改的时间
+                console.log("i = " + i + ", element.lastModifileDate = " + element.lastModifileDate);
+
+            }
+
+            // Blob 对象，代表原始二进制数据类型
+            //      MySQL 中 BLOB 类型只是二进制数据容器
+            //      HTML5  中 存放二进制数据类型，还可以设置数据类型（MIME）
+
+            // file 对象继承了 Blob 对象
+            // Blob 对象 含有两个属性  size：对象字节长度（只读属性）   和
+            //       type：表示MIME类型，若无，则返回一个空字符串
+            //       例子：  
+            //   获取file 文件列表中的第一个文件
+            //      var file = document.getElementById("file").files[0];
+            //      file.size（文件字节长度）       file.type(文件类型) 
+            //  
+            //     既然上述提到 可以获取文件的类型，即可过滤用户上传的文件类型
+            //      如：    if(/image\/\w+/.test(file.type))   判断是否是 图片文件
+            //          解释正则：1. 匹配 image/      2. \w+: 至少一个单词字符
+            //                      匹配成功则返回 true
+            //      但也可以 <input type="file" accept="image/*">
+        }
+    </script>
+</body>
+
+</html>

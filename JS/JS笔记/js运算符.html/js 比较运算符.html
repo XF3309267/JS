@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>js 比较运算符</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+</head>
+
+<body>
+    <script>
+        //  比较运算符 
+        //     1.比较运算符不局限于数值，可以是任意数据，比较过程会
+        //       根据数值的大小，及字符串在字符编码中的位置来比较大小
+        //       其他类型会转换为 数字 或 字符串
+        //     2. 包含检测
+        // var o = {
+        //     a: 1,
+        //     b: function() {},
+        // }
+        // alert("a" in o); // true
+        // alert('b' in o); // true
+        // alert("c" in o); //false
+
+
+        //          等值检测  
+        //       ==  相等       ！=     不相等
+        //      ===  全等       ！==    不全等
+        //  对于对象而言，重点比的是它们的引用地址
+
+
+        //  对于引用类型的值进行比较，主要比较引用的地址是否相同，而不是比较他们的值
+        //      例子：
+        //              var a = new String("abcd");
+        //              var b = new String("abcd");
+        //              a===b;>>> false       a==b;>>> false
+        //      例子：
+        //          var a = {};
+        //          var b = a;
+        //          a === b   >>>>> true
+        // 
+
+
+        //     () >>>> 小括号 ， 函数立即执行
+        //     例子： function() {…………}(), 该函数会立即执行
+
+
+
+
+
+        //   NaN  不等于 任何  (不管是 ==  或 ===)
+        //   undefined == null >>> true
+        alert(NaN === NaN);
+    </script>
+</body>
+
+</html>

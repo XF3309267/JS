@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>图片自动播放</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href=""> -->
+    <style>
+        body {
+            background: rgb(245, 208, 88);
+        }
+        
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+        
+        .screen {
+            width: 490px;
+            height: 170px;
+            position: relative;
+            box-sizing: content-box;
+            padding: 10px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 5px;
+        }
+        
+        .pictureList {
+            width: 490px;
+            height: 170px;
+            overflow: hidden;
+            list-style-type: none;
+            position: relative;
+        }
+        
+        .pictureList li {
+            position: absolute;
+            width: 490px;
+            height: 170px;
+        }
+        
+        .countList {
+            list-style-type: none;
+            position: absolute;
+            right: 17px;
+            bottom: 16px;
+        }
+        
+        .countList li {
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            cursor: pointer;
+            margin-left: 3px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.6rem;
+            float: left;
+            text-align: center;
+            border-radius: 20px;
+            background: rgb(252, 4, 4);
+        }
+        /* .countList li.countHover {
+            opacity: 1;
+            filter: alpha(opacity=100);
+        }
+         */
+        
+        .disshow {
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+        
+        .disshow2 {
+            opacity: 0.3;
+            filter: alpha(opacity=30);
+        }
+        
+        .show {
+            opacity: 1;
+            filter: alpha(opacity=100);
+        }
+    </style>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <!-- <script src="" async defer></script> -->
+    <div class="screen">
+        <ul class="pictureList">
+            <li> <img src="01.jpg" alt=""> </li>
+            <li> <img src="02.jpg" alt=""> </li>
+            <li> <img src="03.jpg" alt=""> </li>
+            <li> <img src="04.jpg" alt=""> </li>
+            <li> <img src="05.jpg" alt=""> </li>
+        </ul>
+        <ul class="countList">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <!-- <img src="05.jpg" alt=""> -->
+    </div>
+</body>
+<script>
+    var pictureList = document.getElementsByClassName('pictureList')[0].getElementsByTagName('li');
+    var countList = document.getElementsByClassName('countList')[0].children;
+    var box = document.querySelector('div.screen');
+    // var pictureList = document.querySelector('ul.pictureList').querySelectorAll('li');
+    // var countList = document.querySelector('ul.countList').querySelectorAll('li');
+    var number = 0;
+    var alphaFun = null;
+    for (let i = 0; i < countList.length; i++) {
+        const element = countList[i];
+        element.index = i;
+        element.onmouseover = function() {
+            showPicture(this.index);
+        }
+
+    }
+    box.onmouseover = function() {
+        clearInterval(play);
+    }
+
+    box.onmouseout = function() {
+        autoPlay();
+    }
+    console.log("pictureList.length = " + pictureList.length);
+    console.log("countList.length = " + countList.length);
+
+    function rotation() {
+        if (number == 5) {
+            number = 1;
+        }
+    }
+
+
+    function hiddenPicture() {
+        // 所有的 图片的 li 的class 设置为  disshow  ；
+        for (let i = 0; i < pictureList.length; i++) {
+            const element = pictureList[i];
+            var eleClass = element.getAttribute('class');
+
+            element.setAttribute('class', 'disshow');
+            // element.className = "disshow";
+        }
+        //  所有的 数字 class 设置为 空
+        for (let j = 0; j < countList.length; j++) {
+            const ele = countList[j];
+            ele.setAttribute('class', "disshow2");
+        }
+    }
+
+    function showPicture(index) {
+        console.log("show  number = " + number);
+        var alpha = 0;
+
+        //  1. 先将所有的图片的透明度设置为 0 , 数字 class 设置为空；
+        hiddenPicture();
+        clearInterval(alphaFun);
+        // clearInterval(alphaFun);
+        for (i = 0; i < pictureList.length; i++) {
+            pictureList[i].style.opacity = 0;
+            pictureList[i].style.filter = "alpha(opacity=0)";
+        }
+        alphaFun = setInterval(function() {
+            console.log("alpha");
+            alpha += 4;
+            alpha > 100 && (alpha = 100);
+            console.log("index  = " + index);
+            pictureList[index].style.opacity = alpha / 100;
+            pictureList[index].style.filter = "alpha(opacity = " + alpha + ")";
+            alpha == 100 && clearInterval(alphaFun);
+        }, 20);
+
+        pictureList[index].setAttribute('class', 'show');
+        countList[index].setAttribute('class', 'show');
+        console.log("countList[index].getAttribute('class') = " + index + '  ' + countList[index].getAttribute('class'));
+        // pictureList[index].className = "show";
+        number = index + 1;
+        if (number > pictureList.length - 1) {
+            number = 0;
+        }
+    }
+    //  循环执行函数
+
+
+    function autoPlay() {
+        play = setInterval(function() {
+            console.log("autopaly number = " + number);
+            showPicture(number);
+            console.log("set");
+        }, 1000);
+    }
+    autoPlay();
+</script>
+
+</html>

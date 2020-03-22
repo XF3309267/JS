@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>形成 txt文件 demo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+    <style>
+        .visually-hidden {
+            position: absolute !important;
+            height: 1px;
+            width: 1px;
+            /* overflow: hidden; */
+            clip: rect(1px, 1px, 1px, 1px);
+        }
+        
+        input.visually-hidden:focus+label {
+            outline: thin dotted;
+        }
+    </style>
+    <script>
+        function test() {
+            var text = document.getElementById("textarea").value;
+            console.log(" typeof text = " + typeof text);
+            var result = document.getElementById("result");
+            if (!window.Blob) {
+                result.innerHTML = "不支持 Blob 对象";
+
+            } else {
+
+                // 创建 Blob对象  
+
+                var blob = new Blob([text], {
+                    type: "text/plain;charset=utf-8"
+                }); //Blob 中数据为文字时默认使用 utf-8格式
+                // 通过 createObjectURL  创建文字链接
+                if (window.URL) {
+                    var txtName = text.substring(0, 4);
+                    console.log("txtName = " + txtName);
+
+                    // var eleLink = document.createElement('a');
+                    // eleLink.download = '01.txt';
+                    // eleLink.style.display = 'none';
+                    // eleLink.href = URL.createObjectURL(blob);
+                    // document.body.appendChild(eleLink);
+                    // eleLink.click();
+                    // document.body.removeChild(eleLink);
+
+                    //  a download 属性，浏览器将自动检测正确的文件扩展名并添加到文件 
+                    //  download = "filename"  只需写入 文件名
+                    result.innerHTML = '<a download="' + txtName + '" href=" ' + window.URL.createObjectURL(blob) + ' "target = "_blank">文件下载</a>';
+                }
+            }
+        }
+
+
+        // function download(filename, text) {
+        //     if (window.URL) {
+        //         var ele = document.createElement('a');
+        //         ele.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        //         ele.setAttribute('download', '01.txt');
+
+        //         ele.style.display = 'none';
+        //         console.log("ele = " + ele);
+
+        //         document.body.appendChild(ele);
+
+        //         ele.click();
+
+        //         document.body.removeChild(ele);
+        //     }
+
+        // }
+
+
+        // download('01.txt', "Thisfile :)");
+    </script>
+</head>
+
+<body>
+    <textarea name="" id="textarea" cols="30" rows="10"></textarea>
+    <button onclick="test()">创建</button>
+    <!-- <div id="dropbox">
+
+    </div>
+    <input type="file" id="fileElem" multiple accept="image/*" class="visually-hidden">
+    <label for="fileElem">Select some files</label> -->
+    <p id="result"></p>
+</body>
+
+</html>
