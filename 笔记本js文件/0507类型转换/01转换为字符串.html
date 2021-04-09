@@ -1,0 +1,112 @@
+<!DOCTYPE ht >
+<html lang="en">
+
+<head>
+    <title> 转换为字符串</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+</head>
+
+<body>
+    <script>
+        //  constructor 类型检测
+        //  constructor  表示构造器，该属性值引用的是构造当前对象的函数
+        //  value.constructor 的属性值(  Number String Boolean Object Array 
+        //  Function  className(函数名 ))
+        //  () 可以把直接量转换为 object 类型(如： (10).constructor)
+
+        //  封装类型检测方法  toString()  返回类型为 [obejct,class]
+        //  obejct 表示对象的通用类型，class 表示对象的内部类型，
+        //  内部类型的名称与该对象的的构造函数名对应，
+
+
+        // 
+
+        var c = new Date();
+        var m = Object.prototype.toString;
+        console.log("m.apply(c) = " + m.apply(c));
+        console.log("c.toString() = " + c.toString());
+
+        // AAAAAAAAAAAAAAAAAAAAAAAAAAA
+        //    转换为 字符串
+        var a = function() {
+            return 1;
+        };
+        console.log("before a = " + a);
+        a = a + "";
+        console.log("after a = " + a);
+        var b = Date + "";
+        console.log("b = " + b);
+
+        // *************************************************
+        //  toString() 对于数字的转换
+        //  toString() 能够直接输出整数和浮点数，
+        //  保留小数位，小数位末尾的零会被清除。（但 var a = 1e-14, a 不会，因为 a 使用的是科学计数法
+        //  在默认模式下 toString 返回的都是  十进制的数字
+        //  a.toString(2) 将数字转换为 二进制的数字 返回（也可 8 16 ）
+
+        // *************************************************
+        //  数字 转换为 字符串 保留小数位数
+        //  1.  a.toFixed( x )      >>   (参数 x 表示 保留小数点后几位)
+        //  2.  a.toExponential(x)  >>   (数字转换为 科学计数法，并小数点保留 x 位)
+        //  3.  a.toPrecision()     >>   (转化为科学计数法，保留 x 位有效数字)
+
+
+        // BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+        //  转换为 数字
+        //  两种静态方法  parseInt()   parseFloat()
+        //  
+        console.log("parseFloat('0.00001') = " + parseFloat('0.1'));
+        //  如何解决 以下情况（就非得转换为科学计数法？）
+        //  parseFloat('0.00001') = 0.1
+
+        //  CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+        //  转换为 对象
+        //  js 有四种基本对象构造器  String Number Function Boolean 
+        var b = new Number(1);
+        var a = b;
+        console.log("before a = " + a + ",  b = " + b);
+        b = 2;
+        console.log("after a = " + a + ",  b = " + b);
+
+        //  看不懂这个函数是什么意思
+        Object.prototype.test = function() {
+            console.log("typeof this = " + typeof(this));
+            console.log("typeof instanceof object = " + this instanceof Object);
+            console.log("this.constructor == Number >>" + this.constructor == Number);
+            console.log("this.constructor == String >>" + this.constructor == String);
+        }
+        var a = 1;
+        console.log("typeof a = " + typeof a);
+        a.test();
+
+        // ***************************************
+        //   对象在逻辑运算环境中的转换
+        //   1. 非空对象在 逻辑运算环境 中，对象被转换为 true ，即使 值为 false
+
+        // ****************************************
+        //   对象在数值运算环境中的转换
+        //   在此环境下，对象会自动转换位数字
+        //      但也有意外的情况： 
+        //          1. 不能转换为有效数字，返回  NaN； 
+        //          2. 有 + 号的情况下，不能转换为有效数字，会执行 字符串连接
+        //          3. 对象 与 数值 的比较运算，与  上一条 一样
+
+        // ******************************************
+        //  数组在数值运算环境中的转换
+        //      1.空数组 转换为 数值 0；
+        //      2.包含一个数字元素 ，转换为该数字的 数值
+        //      3.数组包含多个元素 或 仅包含一个非数字元素，返回 NaN
+
+
+        //   强制转换 >>>    Boolean(value)  Number(value)  String(value)
+        //   1.重点 讲解   parseInt   与    Number
+        //   parseInt   重在 从第一个字符开始，将能转换为数字转换成 数值。不然返回 NaN
+        //   Number     重在  将整个 字符串都转换为数值，字符串里的字符有不能转换的就会返回 NaN
+        //   2. string(value) 与 toString
+        //      toString 能将 null 和 undefined 转换为字符串 "null" "undefined"
+    </script>
+</body>
+
+</html>

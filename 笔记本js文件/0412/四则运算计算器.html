@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>简易网页计算器</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+        
+        #box {
+            width: 300px;
+            height: 420px;
+            margin: 20px auto 0px auto;
+            padding-top: 20px;
+            background: url(image/bg.jpg) repeat;
+        }
+        
+        #showScreen {
+            height: 80px;
+            width: 300px;
+            background: url(image/inputBg.jpg) repeat;
+            border-width: 0px;
+            font-size: 50px;
+            line-height: 80px;
+            text-align: right;
+        }
+        
+        #bigUl {
+            margin: 20px 0px 20px 10px;
+            list-style-type: none;
+            /* background-color: aqua; */
+        }
+        
+        #bigUl li {
+            list-style-type: none;
+            /* height: 61px; */
+            width: 300px;
+            /* background-color: gainsboro; */
+        }
+        
+        #smallUl {
+            list-style-type: none;
+            overflow: hidden;
+        }
+        
+        #smallUl li {
+            display: inline-block;
+            list-style-type: none;
+            width: 63px;
+            height: 40px;
+            color: whitesmoke;
+            font: 27px "微软雅黑";
+            line-height: 40px;
+            text-align: center;
+            background: url(image/btn.png) no-repeat;
+            background-position: 0px 0px;
+            /* background-color: red; */
+            float: left;
+            margin: 20px 10px 0px 0px;
+        }
+        
+        #smallUl li:hover {
+            cursor: pointer;
+            background-position: -62px 0px;
+        }
+        
+        #smallUl li.btZ {
+            background: url(image/btn.png) no-repeat;
+            background-position: 0px -40px;
+        }
+        
+        #smallUl li.btZ:hover {
+            cursor: pointer;
+            background-position: -62px -40px;
+        }
+        
+        #smallUl li.btH {
+            height: 95px;
+            line-height: 95px;
+            position: absolute;
+            -ms-grid-row-span: 2;
+            background: url(image/btn.png) no-repeat;
+            background-position: 0px -164px;
+        }
+        
+        #smallUl li.btH:hover {
+            cursor: pointer;
+            background-position: -63px -164px;
+        }
+        
+        #smallUl li.btZero {
+            width: 134px;
+            background: url(image/btn.png) no-repeat;
+            background-position: 0px -83px;
+        }
+        
+        #smallUl li.btZero:hover {
+            cursor: pointer;
+            background-position: 0px -120px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <input type="text" id="showScreen" value="123" readonly>
+        <ul id="bigUl">
+            <li>
+                <ul id="smallUl">
+                    <li class="btZ">c</li>
+                    <li class="btZ">%</li>
+                    <li class="btZ">÷</li>
+                    <li class="btZ">x</li>
+                </ul>
+            </li>
+            <li>
+                <ul id="smallUl">
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                    <li class="btZ">-</li>
+                </ul>
+            </li>
+            <li>
+                <ul id="smallUl">
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li class="btZ">+</li>
+                </ul>
+            </li>
+            <li>
+                <ul id="smallUl">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li class="btH">=</li>
+                    <li class="btZero">0</li>
+                    <li>.</li>
+                </ul>
+
+
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html

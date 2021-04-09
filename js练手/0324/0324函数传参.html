@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title> 0325</title>
+	<style type="text/css">
+		#box {
+
+			width: 19rem;
+			margin: 0.3125rem auto;
+		}
+
+		#ul1 {
+			list-style-type: none;
+		}
+
+		.inputText {
+			margin-top: 0.8rem;
+		}
+
+		.sub {
+			margin: 0.5rem 0rem 0.5rem 3rem;
+		}
+
+		#Bottom {
+			width: 15rem;
+			height: 15rem;
+			background: black;
+			color: white;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function () {
+			var input0 = document.getElementsByClassName("inputText")[0];
+			var input1 = document.getElementsByClassName("inputText")[1];
+			var sub0 = document.getElementsByClassName("sub")[0];
+			var sub1 = document.getElementsByClassName("sub")[1];
+			var bottom = document.getElementById("Bottom");
+			var show = function (ele, sty, info) {
+				ele.style[sty] = info;
+				// bottom.style['background'] = "yellow";
+			}
+			sub0.onclick = function () {
+				show(bottom, input0.value, input1.value);
+			}
+			sub1.onclick = function () {
+				bottom.removeAttribute("style");
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<div id="box">
+		<ul id="ul1">
+			<li>属性名：<input type="text" name="" id="" value="background" class="inputText" /></li>
+			<li>属性值：<input type="text" name="" id="" value="red" class="inputText" /></li>
+			<li>
+				<input type="submit" value="确定" class="sub" />
+				<input type="submit" value="重置" class="sub"  />
+			</li>
+			<li>
+				<div id="Bottom">
+					在上方输入框输入"属性名"及"属性值"，点击确定按钮查看效果。
+				</div>
+			</li>
+		</ul>
+
+
+
+		<!-- <div id="TopInput">
+				属性名：<input type="text" name="" id="" value="" />
+				属性值：<input type="text" name="" id="" value="" />
+				
+			</div>
+			<div id="MidleSub">
+				<input type="submit"/ value="确定">
+				<input type="submit"/ value="重置">
+			</div>
+			<div id="Bottom">
+				在上方输入框输入"属性名"及"属性值"，点击确定按钮查看效果。
+			</div> -->
+	</div>
+</body>
+
+</html>

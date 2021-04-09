@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>js 数组</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="stylesheet" href=""> -->
+        <script>
+            window.onload = function(){
+                var arr = [1,2,3,4,5,6];
+                var arr1 = 'super,spide,iron,speed';
+                var arr2 = arr1.split(',');
+                var arr3 = arr2.join(';');
+                console.log("arr3 = "+arr3);
+                
+                console.log("arr2.length = "+arr2.length);
+                for (let i = 0; i < arr2.length; i++) {
+                    const element = arr2[i];
+                    console.log("arr2 " +i+" = "+element);
+                }
+                for (let i = 0; i < arr.length; i++) {
+                    const element = arr[i];
+                    console.log("arr " +i+" = "+element);
+                    console.log(dfs);
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        <!-- <script src="" async defer></script> -->
+    </body>
+</html>

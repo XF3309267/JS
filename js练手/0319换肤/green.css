@@ -1,0 +1,14 @@
+body {
+	background: #A3C5A8;
+}
+
+#ul1 {
+	background:#A3C5A8;
+	border-color: white;
+}
+
+
+#ul1 li{
+	background: green;
+	border-color: white;
+}

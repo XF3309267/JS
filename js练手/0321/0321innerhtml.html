@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<style type="text/css">
+			#box{
+				
+			}
+			#box div{
+				width: 25rem;
+				text-align: left;
+				text-indent: 2rem;
+				padding: 0.625rem;
+				margin: 10px auto;
+				border: darkgray solid 3px;
+			}
+		</style>
+		
+		
+		<script type="text/javascript">
+			window.onload = function (){
+				var boxDiv = document.getElementById("box").children;
+				for (var i = 0 ;i<boxDiv.length; i++) {
+					console.log(i+".innerhtml = "+boxDiv[i].innerHTML);		
+					console.log(i+" .innerText = "+boxDiv[i].innerText);
+					console.log(i+" .textContent = "+boxDiv[i].textContent);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<div> <strong>  123</strong> 国务院部署严厉打击食品非法添加和滥用食品添加剂专项行动后，广东省高度重视，随即召开了全省电视电话会</div>
+			<div> <strong>  456</strong> 国务品添加剂专开了院部全省电项行动后，广东省高度重视，随即召视电话会</div>
+			<div> <strong>  789</strong> 剂专开了全省电国务院部品添加项行动后，广东省高度重视，随即召视电话会</div>
+		</div>
+	</body>
+</html>

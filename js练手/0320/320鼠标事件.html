@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<style type="text/css">
+			#box{
+				width: 10rem;
+				height: 11.25rem;
+				color: white;
+				padding: 0.625rem;
+				background: black;
+				border: 0.625rem solid black;
+				margin: 0px auto;
+			}
+		</style>
+		
+		<script type="text/javascript">
+			window.onload = function(){
+				var box = document.getElementById("box");
+				box.onmouseover = function(){
+					box.style.background = "white";
+					box.style.color = "red";
+					console.log("box.style = "+box.style);
+					box.style.border = "0.625rem solid red";
+					// box.style.border-color = "red";
+				}
+				box.onmouseout = function(){
+					box.style.background = "black";
+					box.style.color = "white";
+					box.style.border = "0.625rem solid black";
+				}
+			}
+		</script>
+		
+	</head>
+	<body>
+		<div id="box">
+			鼠标移入改变样式，鼠标移出恢复
+		</div>
+	</body>
+</html>

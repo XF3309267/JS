@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>判断数字位数</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+    <script>
+        window.onload = function() {
+            var text = document.getElementById("num");
+            var bt = document.getElementById("but");
+            bt.onclick = function() {
+                if (text.value.length == 2) {
+                    alert("Yes , 这是个两个位数");
+                } else {
+                    alert("Sorry , 这是个" + text.value.length + "位数");
+                }
+            }
+
+            console.log("typeof text.value ==" + typeof(text.value));
+        }
+    </script>
+</head>
+
+<body>
+    <input type="text" id="num">
+    <input type="button" id="but" value="检测">
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>js 照片例子</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+        
+        .show {
+            width: 640px;
+            height: 480px;
+            margin: 20px auto;
+            margin-bottom: 0px;
+            background: url(pic2.jpg) no-repeat;
+        }
+        
+        .hidd {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0);
+        }
+        
+        .chil {
+            width: 640px;
+            margin: 0px auto;
+            overflow: hidden;
+            zoom: 1;
+            display: block;
+        }
+        
+        .chil_li {
+            width: 128px;
+            height: 96px;
+            background-color: blue;
+            list-style-type: none;
+            float: left;
+        }
+        
+        .bt:hover,
+        .chil_li:hover {
+            cursor: pointer;
+        }
+        
+        .bt {
+            width: 40px;
+            height: 30px;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="show">
+
+        <div class="hidd">
+            <button class="bt">变暗</button>
+        </div>
+    </div>
+    <ul class="chil">
+        <li class="chil_li"></li>
+        <li class="chil_li"></li>
+        <li class="chil_li"></li>
+        <li class="chil_li"></li>
+        <li class="chil_li"></li>
+    </ul>
+    <script>
+        var divShow = document.querySelector("div.show");
+        var divChild = document.querySelectorAll(".chil_li");
+        var button = document.querySelector("button.bt");
+        var hidd = document.querySelector('div.hidd');
+        showSmallPicture();
+
+        function showSmallPicture() {
+            button.onclick = function() {
+                //console.log("divShow.style.opacity   =" + divShow.style.opacity);
+                // divShow.style.background = 'grey';
+                // var oldColor = hidd.style.backgroundColor
+                console.log("hidd.style.backgroundColor = " + hidd.style.backgroundColor.toString());
+                console.log("button.textContent  =" + button.textContent);
+                var str = button.textContent;
+                console.log("str = " + str);
+                if (hidd.style.backgroundColor.toString() == "") {
+                    console.log(" 按下  变暗");
+                    hidd.style.backgroundColor = 'rgba(0,0,0,0.5)';
+                    button.textContent = '变亮';
+                    console.log("hidd.style.backgroundColor  =" + hidd.style.backgroundColor.toString());
+                } else {
+                    console.log(" 按下  变亮");
+                    hidd.style.backgroundColor = '';
+                    button.textContent = '变暗';
+                }
+
+
+            }
+            for (let i = 0; i < divChild.length; i++) {
+                const element = divChild[i];
+                element.style.background = 'url(pic' + (i + 1) + '.jpg ';
+                // console.log("element.style.background  = " + element.style.background);
+                // console.log("element.style.background.toString() = " + element.style.background.toString());
+                // console.log("Number(element.style.background) = " + parseInt(element.style.background.toString()));
+                element.style.backgroundSize = "128px 96px";
+                element.onclick = function() {
+                    divShow.style.background = 'url(pic' + (i + 1) + '.jpg ';
+                }
+            }
+        }
+        // var divshow = document.getElementsByClassName("show")[0];
+        console.log("divShow = " + divShow);
+    </script>
+</body>
+
+</html>

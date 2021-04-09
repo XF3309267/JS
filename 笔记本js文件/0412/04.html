@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>数字随秒递增</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+    <style>
+        body {
+            font-size: 200px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            var i = 0;
+            var bod = document.body;
+            setInterval(addTime, 1000);
+
+            function addTime() {
+                i++;
+                bod.innerHTML = i;
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

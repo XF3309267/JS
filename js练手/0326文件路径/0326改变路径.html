@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <script src="main.js"></script>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+        
+        #box {
+            width: 220px;
+            height: 280px;
+            margin: 20px auto;
+            background: whitesmoke;
+            border-radius: 3px;
+            list-style-type: none;
+            padding: 5px 5px 10px 10px;
+            overflow: hidden;
+            zoom: 1;
+        }
+        
+        #box li ,#box li img {
+            width: 50px;
+            height: 50px;
+            border-radius: 3px;
+            float: left;
+            margin: 5px 5px 0px 0px;
+            /* display: inline-block; */
+        }
+        #box li.bigLi,
+        #box li.bigLi img {
+            width: 160px;
+            height: 160px;
+            position: relative;
+        }
+        #div1{
+            width: 160px;
+            height: 160px;
+            position: absolute;
+            background: #FFF url("img/loading.gif" ) 50% 50% no-repeat;
+            opacity:0.5;filter:alpha(opacity=50);
+            display: none;
+        }
+    </style>
+    <script>
+        window.onload = function (){
+            var imgChild = document.getElementById("box").getElementsByTagName("img");
+            var imgShow = imgChild[0];
+            var div = document.getElementById("div1");
+            for (let i = 1; i < imgChild.length; i++) {
+                imgChild[i].onmouseover = function(){
+                    var newImg = new Image();
+                    newImg.src = imgShow.src = this.src.replace(/small/,"big");
+                    newImg.complete ? div.style['display'] = "none" : (imgShow.onload = function() {div.style['display'] = "none"});
+                }
+                
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <ul id="box">
+        <li class="bigLi">
+            <a href=""> <img src="img/big_1.jpg" alt=""> </a>
+            <div id="div1">
+            </div>
+        </li>
+        <li>
+            <a href="" > <img src="img/small_1.jpg" alt=""> </a>
+        </li>
+        <li>
+            <a href="" > <img src="img/small_2.jpg" alt=""> </a>
+        </li>
+        <li>
+            <a href="" > <img src=" img/small_3.jpg " alt=" "> </a>
+        </li>
+        <li>
+            <a href=" " > <img src="img/small_4.jpg " alt=" "> </a>
+        </li>
+        <li>
+            <a href=" "> <img src="img/small_5.jpg " alt=" "> </a>
+        </li>
+        <li>
+            <a href=" "> <img src="img/small_6.jpg " alt=" "> </a>
+        </li>
+        <li>
+            <a href=" "> <img src="img/small_7.jpg " alt=" "> </a>
+        </li>
+        <li>
+            <a href=" "> <img src="img/small_8.jpg " alt=" "> </a>
+        </li>
+        <li>
+            <a href=" "> <img src="img/small_9.jpg " alt=" "> </a>
+        </li>
+        <li>
+            <a href=" "> <img src="img/small_10.jpg " alt=" "> </a>
+        </li>
+        <li>
+            <a href=" "> <img src="img/small_11.jpg " alt=" "> </a>
+        </li>
+    </ul>
+</body>
+
+</html>

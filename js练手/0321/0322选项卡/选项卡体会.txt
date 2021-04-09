@@ -1,0 +1,19 @@
+
+
+制作选项卡的几种方法:
+AAAAAAAAAAAAAAAAAAAAAA:
+1.box>>  position: relative; width: 37.5rem;
+2.ul1>>  overflow: hidden;(能够撑起ul1，因为后						面，li要设float属性（清除间隙）)
+　　　　　　　　　 list-style-type: none;
+3.ul1>li>>  float: left; display: inline-block;
+4.ul2>>  position: absolute; 
+解释： ul1 中的 hidden 并没有隐藏 ul2 中的各个元素；因为ul2 已经脱离文档流，且只有最近的父级（position不是static）的hidden才能对其隐藏
+
+BBBBBBBBBBBBBBBBB:
+1.Box>>  width: 37.5rem; height: 1.8rem;
+2.ul1>>  position: relative;list-style-type: none;
+3.Ul1>li>>  float: left; diplay: inline-block;
+4.Ul2>>   position: absolute;
+总结：
+A >> 设有 absloute;
+A会根据最近的父级（B）非 static（position默认值）进行定位。虽然 A 不占空间 但是属于 B ，

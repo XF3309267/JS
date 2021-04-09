@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>js 函数 </title>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        
+        .sp {
+            width: 400px;
+            /* height: 100px; */
+            margin: 300px auto;
+            margin-bottom: 0px;
+            background-color: red;
+            overflow: hidden;
+            zoom: 1;
+        }
+        
+        .sp div {
+            width: 100px;
+            height: 100px;
+            background-color: antiquewhite;
+            /* display: inline-block; */
+            float: left;
+        }
+        
+        .after {
+            height: 20px;
+            background-color: red;
+        }
+    </style>
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+
+</head>
+
+<body>
+    <!-- <div>
+        <input type="button" value="验证">
+    </div> -->
+    <div class="sp">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+
+    </div>
+
+    <script>
+        var bt = document.querySelector("input");
+        var divList = document.querySelectorAll('div');
+
+        function ok() {
+            divList[0].onclick = function(e) {
+                    e.currentTarget.style.border = '2px solid black';
+                }
+                //e = e || window.event;
+            for (let i = 1; i < divList.length; i++) {
+                console.log("i =" + i);
+                const element = divList[i];
+
+                element.onclick = function(e) {
+                    //  停止事件冒泡
+                    e.stopPropagation();
+                    console.log("e.target.style.backgroundColor = " + e.target.style.backgroundColor);
+                    //e.target.style.backgroundColor = bgChange(e);
+                    bgChange(e);
+                }
+            }
+        }
+
+        function bgChange(e) {
+            console.log("e.target = " + e.target);
+            var col = 'rgb(' + parseInt(Math.random() * 255 + 1) + ',' + parseInt(Math.random() * 255 + 1) + ',' + parseInt(Math.random() * 255 + 1) + ')';
+            console.log("col  =" + col);
+            e.target.style.backgroundColor = col;
+            console.log("e = " + e);
+        }
+
+        //bt.addEventListener('click', fa);
+        // bt.addEventListener('click', fb);
+
+        function fa() {
+            console.log("fa");
+            alert("fa");
+        }
+
+        function fb() {
+            console.log("fb");
+            alert("fb");
+        }
+
+        ok();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <script src="main.js"></script>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+        
+        #box {
+            width: 130px;
+            height: 340px;
+            padding: 10px;
+            margin: 20px auto;
+            border: 1px solid black;
+            border-radius: 4px;
+        }
+        
+        #box input {
+            margin-right: 5px;
+            width: 0.8rem;
+            height: 0.8rem;
+            vertical-align: middle;
+        }
+        
+        #span1 {
+            width: 130px;
+            height: 35px;
+            border-bottom: 1px solid black;
+        }
+        
+        #a1 {
+            color: blue;
+            margin-left: 15px;
+            text-decoration: none;
+        }
+        
+        .ul1 {
+            list-style-type: none;
+            overflow: hidden;
+            zoom: 1;
+        }
+        
+        .ul1 li {
+            font-size: 0.9rem;
+            color: gray;
+            margin-top: 10px;
+            float: left;
+        }
+    </style>
+    <script>
+        window.onload = function (){
+            var fristCheckbox = document.getElementById("span1").getElementsByTagName("input")[0];
+            var aText = document.getElementById("span1").getElementsByTagName("a")[0];
+            var ul1Child = document.getElementsByClassName("ul1")[0].getElementsByTagName("input"); 
+            //console.log("ul1.length = "+ul1Child.length);
+
+            // 判断： 是否每个子级复选框都选上了，若都选上则 “全选框”勾上
+            function checkAll(){
+                for (let i = 0,n=0; i < ul1Child.length; i++) {
+                    ul1Child[i].checked&&n++;
+                   // console.log(" n ="+n);
+                    fristCheckbox.checked = n==ul1Child.length;
+                }
+            }
+            // “全选框”是否勾上，带动其他子级框
+            fristCheckbox.onclick = function(){
+                for (let i = 0,n=1; i < ul1Child.length; i++) {
+                    ul1Child[i].checked = this.checked;
+                }
+            }
+            // 反选
+            aText.onclick = function (){
+                for (let i = 0,n=1; i < ul1Child.length; i++) {
+                    ul1Child[i].checked = !ul1Child[i].checked;
+                    //console.log(i+"checked = "+ul1Child[i].checked);
+                    
+                }
+                checkAll();
+               
+            }
+            for (let i = 0; i < ul1Child.length; i++) {
+                    ul1Child[i].onclick =function (){
+                        //this.checked = ! this.checked; 
+                        checkAll();
+                    }
+                    
+                }
+            console.log("input[0].name = "+fristCheckbox.name);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="box">
+        <div id="span1">
+            <input type="checkbox" name="allChose">
+            <strong> 全选 </strong>
+            <a id="a1" href="#">反选</a>
+        </div>
+        <ul class="ul1">
+            <form action="">
+                <li> <input type="checkbox" name="1" > 选项 （一）</li>
+                <li> <input type="checkbox" name="2"> 选项 （二）</li>
+                <li> <input type="checkbox" name="3"> 选项 （三）</li>
+                <li> <input type="checkbox" name="4"> 选项 （四）</li>
+                <li> <input type="checkbox" name="5"> 选项 （五）</li>
+                <li> <input type="checkbox" name="6"> 选项 （六）</li>
+                <li> <input type="checkbox" name="7"> 选项 （七）</li>
+                <li> <input type="checkbox" name="8"> 选项 （八）</li>
+                <li> <input type="checkbox" name="9"> 选项 （九）</li>
+                <li> <input type="checkbox" name="10"> 选项 （十）</li>
+            </form>
+        </ul>
+    </div>
+</body>
+
+</html>

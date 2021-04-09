@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+
+    <style>
+        .box {
+            width: 500px;
+            height: 300px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <input type="text" class="text">
+        <input type="button" class="bt" value="提交">
+    </div>
+
+    <script>
+        //  g   >>>     全局匹配
+        //  i   >>>     区分大小写匹配
+        //  m   >>>     
+
+        // 定义正则表达式的方法 ： 构造法 和  直接量
+        // 1. 构造正则表达式
+        //  使用 RegExp 构造函数 定义正则表达式对象     >>  new RegExp(pattern,attributes) 
+        //  pattren 是一个字符串，指定正则表达式的模式 或者 其他正则表达式
+        //  attributes  是一个可选的 修饰性标志，包含 "g" "i" "m" 或者 他们的组合 "gi"
+        //  举例： 
+        //      1. var r = new RegExp("a","gi");         var a = str.match(r);
+        //      2. var r = new RegExp("\\b\\w","gi")
+        //         解释： "\b" 表示单词的边界; "\w" 表示任意 Ascall字符;
+        //                反斜杠表示转义序列，避免 Regular()构造函数误解，必须使用 "\\"表示 "\"
+        //      3. 如果第一个参数是 正则表达式 则第二个参数可以省略
+
+        //  构造正则表达式对象 
+        var a = new RegExp("\\b\\w", "gi");
+        //  对正则表达式对象进行 封装
+        var b = new RegExp(a);
+        //  Regexp()作为函数使用，参数是 正则表达式（a） ，
+        //  那么它仅返回正则表达式，不再创建新的 RegExp 对象
+        var c = RegExp(a);
+        console.log("typeof a = " + typeof a);
+        console.log("typeof b = " + typeof c);
+        console.log("typeof c = " + typeof c);
+
+        //  RegExp()构造函数接受字符串，而不是正则表达式的匹配模式，
+        //  所以第一个参数中的 特殊字符 必须使用 双斜杆 来表示，
+        //  第二个参数应该用双引号包含
+
+        //  正则表达式直接量 按正则表达式的规则定义，普通字符
+        //  和特殊字符都会被正确解释
+
+
+        // 正则表达式直接量
+        //  正则表达式直接量使用 双斜杆 作为分割符进行定义，双斜杆之间包含 正则表达式的模式，
+        //  模式中不能有引号，标志字符(g  i m)放在最后一个斜杆的后面
+
+        // 动态创建正则表达式，必须使用 RegExp构造函数
+        // var a = [
+        //     "I am a boy",
+        //     "I am a student",
+        // ];
+        // var t = document.querySelector('input.text');
+        // var w = document.querySelector('input.bt')
+
+
+        // w.addEventListener('click', showResult);
+
+        // function showResult() {
+        //     var va = t.value;
+        //     var r = new RegExp(va);
+        //     for (const i in a) {
+        //         if (a.hasOwnProperty(i)) {
+        //             const element = a[i];
+        //             console.log(element);
+        //             var res = element.match(r);
+        //             console.log("result = " + res);
+        //         }
+        //     }
+        // }
+
+
+
+
+
+
+        //  1. 返回最后一个子模式所匹配到的字符串（RegExp.lastParen 或者  RegExp["$+"](简写)）
+        //  1. 若最后一个子模式没有匹配到字符串 则返回空字符串
+        //  RegExp.input    &_  被执行匹配的字符串
+        //  RegExp.index    当前模式匹配的开始位置，从 0 开始计数，初始值为 -1,每次匹配，每次改变
+        //  RegExp.lastIndex  当前模式匹配的最后一个字符的下一个字符位置，初始值为 0 
+        //                    每次匹配每次改变，可手动 将值改变为 0;当匹配不到是，返回0；
+        //  RegExp.lastMatch  $&    匹配成功返回的字符串
+        //  RegExp.lastParen  $+    最后子模式匹配的字符串
+        //  子模式 >>>   即是 整个模式中的 一个 分支模式
+        //      理解：可以是 括号 括起来，或者其他分隔（只要明显区分，即可分为多个子模式）
+        //            整个模式，从第一个子模式开始匹配。第一个匹配成功，
+        //            则从成功的下一个位置进行第二个子模式匹配，
+        //            只有真个模式匹配成功，才算模式匹配成功
+        //  RegExp.leftContext  $`  所匹配到的字符串左边的所有内容，初始值为空字符串，每次匹配每次改变 
+        //  RegExp.rightContext $'  同上 右边的
+        //  $1-$9   $1-$9   只读属性，$1-$9 分别是第一个到第九个子模式所匹配到的内容，
+        //                  如果超过九个，就最后面的九个
+        //                  在一个匹配模式中可以指定任意多个小括号包含的子模式，但 RegExp
+        //                  静态属性只能存储最后九个
+        var re = /Java(Script)/gi;
+        var s = "JavaScript,not Javascript";
+        console.log("00 RegExp.lastIndex  =" + re.lastIndex);
+        var aa = re.exec(s);
+
+        //   index 属性 ？？？？？？？？？？
+        console.log("RegExp.index  =" + RegExp.index);
+
+        console.log("RegExp.lastIndex  =" + re.lastIndex);
+        console.log("lastMatch = " + RegExp.lastMatch);
+        console.log("RegExp.lastParen = " + RegExp.lastParen);
+        console.log('11 RegExp [$+] =' + RegExp["$+"]);
+        var aa = re.exec(s);
+        console.log("22 RegExp.index  =" + RegExp.index);
+        console.log("22 RegExp.lastIndex  =" + re.lastIndex);
+        var aa = re.exec(s);
+        console.log("33 RegExp.lastIndex  =" + re.lastIndex);
+        // console.log('22 RegExp [$+] =' + RegExp["$+"]);
+    </script>
+</body>
+
+</html>

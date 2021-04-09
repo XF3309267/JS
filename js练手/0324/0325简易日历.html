@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+    <!-- 小结：
+            1. 在写ul标签下的 li 标签时 ，虽然你在li 中 设置了  display： inline-block； 但是在 <li> </li> 与 <li> </li>之间还是有空隙，所以在此必须用 float:left;
+            2. min-height 等相似属性，似乎必须放在 div 中 或类似 div 标签中，虽然可以设置 display：block；但是好像不起作用。有待考证！！
+    -->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title> 简易日历 </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="#">
+        <style>
+            *{
+                padding: 0px;
+                margin: 0px;
+            }
+            #box{
+                width: 300px;
+                /* height: 290px; */
+                margin: 20px auto;
+                padding-bottom:2px; 
+                background: rgb(170, 168, 168);
+            }
+            #ul1{
+                padding: 0px 0px 10px 10px;
+                list-style-type: none;
+                color: white;
+				overflow: hidden;
+				zoom: 1;
+            }
+            #ul1 li{
+                width: 60px;
+                height: 55px;
+                border: 1px solid black;
+                margin-top: 10px;
+                margin-right: 10px;
+                padding-top: 5px;
+                float: left;
+                /* margin: 10px 10px 0px 0px ; */
+                text-align: center;
+                background: rgb(66, 66, 66);
+                /* display: inline-block; */
+            }
+            #ul1 li.over{
+                background: white;
+                color: red;
+            }
+            #showscreen{
+               
+
+                width: 250px;
+                min-height: 3rem;
+                max-height: 80px;
+                border: 1px solid white;
+                padding-top: 5px;
+                padding-left: 10px; 
+                margin: 3px auto; 
+                color: grey;
+                background: whitesmoke;
+                list-style-type: none;
+                overflow: hidden;
+                zoom: 1;
+            }
+            #showscreen ul {
+              
+                
+                /* min-height: 2rem; */
+                /* height: 3rem; */
+                display: none;
+                /* display: inline-block; */
+                /* float: left; */
+            }
+            /* #showscreen ul::after{
+                content: " ";
+                height: 2rem;
+            } */
+        </style>
+        <script>
+            window.onload = function(){
+                var ul1Children = document.getElementById("ul1").children;
+                var showChildren = document.getElementById("showscreen").children;
+                console.log("show.length = "+showChildren.length);
+                showChildren[7].style['display'] = "block";
+                for (let i = 0; i < ul1Children.length; i++) {
+                    ul1Children[i].index = i;
+
+                    ul1Children[i].onmouseover = function (){
+                        for (let j = 0; j < ul1Children.length; j++) {   
+                            ul1Children[j].className = " ";
+                            showChildren[j].style['display'] = "none";
+                         }
+                        this.className = "over";
+                        showChildren[this.index].style['display'] = "block";
+                    };
+                    ul1Children[i].onmouseout = function (){
+                        this.className = " ";
+                        showChildren[this.index].style['display'] = "none";
+                    };
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div id="box">
+            <ul id="ul1">
+                <li> <h2>1</h2> JAN </li>
+                <li> <h2>2</h2> FER </li>
+                <li> <h2>3</h2> MAR </li>
+                <li> <h2>4</h2> APR </li>
+                <li> <h2>5</h2> MAY </li>
+                <li> <h2>6</h2> JUN </li>
+                <li> <h2>7</h2> JUL </li>
+                <li class="over"> <h2>8</h2> AUG </li>
+                <li> <h2>9</h2> SEP </li>
+                <li> <h2>10</h2> OCT </li>
+                <li> <h2>11</h2> NOV </li>
+                <li> <h2>12</h2> DEC </li>
+            </ul>
+            <div id="showscreen">
+                <ul>
+                        <li>  <h4> 1月节日</h4> </li> 
+                        <li>    11月节日        </li>
+                </ul>
+                <ul>
+                        <li>  <h4> 2月节日</h4> </li> 
+                        <li>    22月节日        </li>
+                </ul>
+                <ul>
+                        <li>  <h4> 3月节日</h4> </li> 
+                        <li>    33月节日        </li>
+                </ul>
+                <ul>
+                        <li>  <h4> 4月节日</h4> </li> 
+                        <li>    44月节日        </li>
+                </ul>
+                <ul>
+                        <li>  <h4> 5月节日</h4> </li> 
+                        <li>    55月节日        </li>
+                </ul>
+                <ul>
+                        <li>  <h4> 6月节日</h4> </li> 
+                        <li>    66月节日        </li>
+                </ul>
+                <ul>
+                        <li>  <h4> 7月节日</h4> </li> 
+                        <li>    77月节日        </li>
+                        <li>    7777月节日        </li>
+                </ul>
+                <ul>
+                        <li>  <h4> 8月节日</h4> </li> 
+                        <li>    88月节日        </li>
+                </ul>
+                <ul>
+                        <li>  <h4> 9月节日</h4> </li> 
+                        <li>    99月节日        </li>
+                </ul>
+                <ul>
+                        <li>  <h4> 10月节日</h4> </li> 
+                        <li>    1010月节日        </li>
+                </ul>
+                <ul>
+                        <li>  <h4> 11月节日</h4> </li> 
+                        <li>    1111月节日        </li>
+                </ul>
+                <ul>
+                        <li>  <h4> 112月节日</h4> </li> 
+                        <li>    1212月节日        </li>
+                        <li>    1222月节日        </li>
+                </ul>
+
+                 <!-- <li>  <h4> 2月节日</h4>  <br>22月节日</li>
+                    <li>  <h4> 3月节日</h4>  <br>33月节日</li>
+                    <li>  <h4> 4月节日</h4>  <br>44月节日</li>
+                    <li>  <h4> 5月节日</h4>  <br>55月节日</li>
+                    <li>  <h4> 6月节日</h4>  <br>66月节日</li>
+                    <li>  <h4> 7月节日</h4>  <br>77月节日</li>
+                    <li>  <h4> 8月节日</h4>  <br>88月节日</li>
+                    <li>  <h4> 9月节日</h4>  <br>99月节日</li>
+                    <li>  <h4> 10月节日</h4> <br>1010月节日 </li>
+                    <li>  <h4> 11月节日</h4> <br>1111月节日 </li>
+                    <li>  <h4> 12月节日</h4> <br>1212月节日 </li> -->
+            </div>
+        </div>
+        <script src="#" async defer></script>
+    </body>
+</html>

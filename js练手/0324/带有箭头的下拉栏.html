@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <script src="main.js"></script>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        #box{
+            width: 190px;
+            height: 2rem;
+            color: grey;
+            border: 1px solid grey;
+            margin: 0px auto;
+            margin-top: 20px;
+            position: relative;
+        }
+        #box>h4{
+            width: 188px;
+            /* height: 30px; */
+           
+            line-height: 30px;
+            text-indent: 0.5rem;
+            border: 1px solid white;
+            background: #ced3d7 url(ico.gif)  no-repeat;
+            background-position:  175px -15px;
+        }
+        #box>h4.click{
+            background-position: 175px 15px ;
+        }
+        .ul1{
+            display: none;
+            position: absloute;
+            background: #dde1e4;
+            border: 1px solid grey;
+            padding: 5px 5px 0px 0.5rem ; 
+            list-style-type: none;
+        }
+        .ul1>li{
+            padding-bottom: 5px;
+        }
+        .ul1>li>a{
+            color: grey;
+            font-size: 0.7rem;
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var boxChild = document.getElementById("box").children;
+            var ul1 = document.getElementsByClassName("ul1")[0];
+            console.log("boxChild[0].bg.position = "+boxChild[0].style['backgroundPosition'].innertext);
+            boxChild[0].onclick = function(){
+                console.log("dianji");
+                var style = ul1.style;
+                // style['display'] = "none";
+                style['display'] = style['display'] =="none" ? " block":"none";
+                boxChild[0].className = (style['display'] =="none") ? " " : "click ";
+                console.log("0.className = "+ boxChild[0].className);
+            }
+        }
+    </script>
+
+</head>
+<body>
+    <div id="box">
+       <h4 >
+           播放列表
+       </h4>
+       <ul class="ul1">
+           <li> <a href=""> 玩家之徒 - 蔡依林 </a> </li>
+           <li> <a href=""> 原谅我就是这样的女生 - 戴佩妮 </a> </li>
+           <li> <a href=""> 猜不透 - 丁当 </a> </li>
+           <li> <a href=""> 自导自演 - 周杰伦 </a> </li>
+           <li> <a href=""> 浪漫窝 - 弦子 </a> </li>
+       </ul>
+    </div>
+    <div style="height:50px; background: red;"></div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>
+	ÄãºÃ
+    </title>
+    <style>
+	.ur1{
+	     display: inline-block;
+	     background-color:red;
+	}
+    </style>
+  </head>
+  <body>
+	<div>
+	  <ur class ="ur1">
+	    <li> 111</li>
+	    <li> 222</li>
+	  </ur>
+	</div>
+  </body>
+</html>

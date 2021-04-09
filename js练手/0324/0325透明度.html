@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html>
+<!--<![endif]-->
+<!-- 
+    小结:
+    1. 在设置排序整齐的东西的时候，可以：让整体大盒子 下、左 都 padding： 10px；再让大盒子里的子元素 都向上 右 margin：10px；如该例子
+    2. #id ,id 设置的style属性的优先级高于 class 的优先级（如：#box ul li  大于  .li (应用在 box >> ul >> li )）
+    3. 在此犯的错误： onmouseover {this.className = "show" }  ;;;   onmouseout {this.className = " "},(.old img) 样式也没了
+    4. #ul1 li img  >  .show img(此情况必须标明 #ul1 下) ;      #ul1 li img   <  #ul li.show img 
+
+ -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>js实现透明度</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="#"> -->
+    <style type="text/css">
+        #ul1 {
+            width: 720px;
+            height: 290px;
+            padding: 0px 0px 10px 10px;
+            margin: 50px auto;
+            border: 1px solid black;
+            list-style-type: none;
+        }
+
+
+        #ul1 li{
+            display: inline-block;
+            margin: 10px 10px 0px 0px;    
+        }
+        #ul1  li img{
+            border: 1px solid black;
+            opacity: 0.3;
+            filter: alpha(opacity = 30);
+        }
+        #ul1 .show img{
+            /* border: 1px solid black; */
+            cursor: pointer;
+            opacity: 1;
+            filter: alpha(opacity = 100);
+        }
+    </style>
+    <script >
+        window.onload = function(){
+            var ul1 = document.getElementById("ul1").children;
+            for (var i = 0; i < ul1.length; i++) {
+                ul1[i].onmouseover = function (){
+                    this.className = "show";
+                    console.log("in");
+                }
+                ul1[i].onmouseout = function (){
+                    console.log("out");
+                    this.className = " ";
+                }
+                console.log("ul1["+i+"] = "+ul1[i]);
+                
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <ul id="ul1" >
+        <li>  <img src="5.jpg" alt="汽车标志"> </li>
+        <li>  <img src="5.jpg" alt="汽车标志"> </li>
+        <li>  <img src="5.jpg" alt="汽车标志"> </li>
+        <li>  <img src="5.jpg" alt="汽车标志"> </li>
+        <li>  <img src="5.jpg" alt="汽车标志"> </li>
+        <li>  <img src="5.jpg" alt="汽车标志"> </li>
+        <li>  <img src="5.jpg" alt="汽车标志"> </li>
+        <li>  <img src="5.jpg" alt="汽车标志"> </li>
+        <li>  <img src="5.jpg" alt="汽车标志"> </li>
+        <li>  <img src="5.jpg" alt="汽车标志"> </li>
+    </ul>
+
+    
+</body>
+
+</html>

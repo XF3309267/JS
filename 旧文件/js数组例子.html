@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>js 数组练习</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+    <style>
+        .box {
+            width: 400px;
+            padding: 10px;
+            margin: 20px auto;
+            border: 2px solid black;
+            text-align: left;
+        }
+        
+        .box input {
+            margin: 10px;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            //  数据  >>>>> 字符串数组
+            var chineseStory = ['李雷啊发顺丰的爱国感到翻跟斗',
+                '反对法让他李雷',
+            ];
+
+            var UKStory = ['Bob is a good boy',
+                'A gentleman is Bob',
+            ];
+
+            var China = ['请输入自定义的名字：',
+                '中国',
+                '美国',
+                '提交',
+                '李雷',
+                chineseStory,
+            ];
+            var Ame = ['Please input name',
+                'China',
+                'UK',
+                'submit',
+                'Bob',
+                UKStory,
+            ];
+
+
+            function myObj(name, attr) {
+                this.China = name;
+                this.UK = attr;
+            }
+
+
+
+            var lan = new myObj(China, Ame);
+            // 获取属性 数组
+            var keys = Object.keys(lan);
+
+            // 获取 body 中的元素
+            var inputList = document.getElementsByTagName('input');
+            var inputText = document.getElementById('inputText');
+            var strongList = document.querySelectorAll('.box strong');
+            var pStory = document.querySelector('.box p');
+            // 将被赋予已选中的 object
+            var selected = China;
+            var bt = document.getElementById('but');
+            // var bt = documetn.querySelector('.box input');
+
+            console.log("strongList.length = " + strongList.length);
+            console.log('input.length = ' + inputList.length);
+            for (let i = 0; i < inputList.length; i++) {
+                const element = inputList[i];
+                bt.onclick = function() {
+                    cStory(selected);
+                    console.log("p.innerHTML = " + pStory.textContent);
+                }
+
+                // 如果为 radio 属性 ，判断其选中的语言格式，并为 body 中的文字改变格式
+                if (element.type == 'radio') {
+                    if (element.value == "UK") {
+                        element.checked = true;
+                        selected = Ame;
+                        changeShowLan(selected);
+                    }
+                    element.onclick = function() {
+                        pStory.innerHTML = '';
+                        for (let i in lan) {
+                            if (element.checked) {
+                                // 查找 语言版本库 ，判断已选择的 语言 对应 语言库 中的哪个版本
+
+                                // i 是 lan 的 key ，类型为 string 类型 
+                                // lan[i]  所对应的键值，类型为 object 类型。
+                                if (i == element.value) {
+                                    console.log("let i  = " + i);
+                                    // lan[i] 是
+                                    selected = lan[i];
+                                    console.log("lan[j].value = " + lan[i]);
+                                    changeShowLan(lan[i]);
+                                }
+                            }
+                        }
+                    }
+
+                }
+                //############################################
+
+
+            }
+
+            function changeShowLan(lang) {
+                var i = 0;
+                for (; i < strongList.length; i++) {
+                    //console.log(strongList[i]);
+                    strongList[i].innerHTML = lang[i];
+                    console.log("lang value " + i + "  " + lang[i]);
+                }
+                console.log("lang value " + i + "  " + lang[i]);
+                bt.value = lang[i];
+            }
+
+            function cStory(selectedObj) {
+                var storyList = selectedObj[selectedObj.length - 1];
+                var storyName = selectedObj[selectedObj.length - 2];
+                var ran = parseInt(Math.random() * 2, 10);
+                console.log("typeof storyName = " + typeof storyName);
+                console.log("inputList.value = " + inputText.value);
+                var showStory = storyList[ran].replace(storyName, inputText.value);
+                console.log("showStory = " + showStory);
+                pStory.innerHTML = showStory;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="box">
+        <strong>
+            请输入自定义的名字：
+        </strong>
+        <input type="text" id="inputText">
+        <br>
+        <strong>
+            中国
+        </strong>
+        <input type="radio" name="language" value="China">
+        <strong>
+                美国
+        </strong>
+        <input type="radio" name="language" value="UK">
+        <br>
+        <input type="button" value="提交" id="but">
+        <p></p>
+    </div>
+</body>
+
+</html>

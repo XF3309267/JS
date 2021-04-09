@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	
+	<body onunload ="pclose()">
+		<div style="width: 800px; height: 500px; overflow: hidden;">
+			<img style="transition: width 0.55s,height 0.55s;cursor: pointer;" src="01.jpg" name ="img1" id="img1" onload="blowup()" onmouseout="blowup()" onmouseover="reduce()" />
+		</div>
+		
+		<script>
+			var img1 = document.getElementById('img1');
+			
+			var h = 0;
+			var w = 0;
+			
+			function blowup(){
+				 h = img1.naturalHeight;
+				 w = img1.naturalWidth;
+				console.log(h);
+				console.log("blowup img1.height ="+img1.height);
+				if(img1.naturalHeight==h){
+					// console.log("h blowup ="+h);
+					console.log("blowup img1.naturalHeight="+img1.height);
+					img1.height = h-h*0.02;
+					console.log("blowup  after img1.naturalHeight="+img1.height);
+					img1.width = w-w*0.02;
+					
+				}
+			}
+			console.log("h ="+h);
+			function reduce(){
+				if(img1.height<h){
+					img1.height = h;
+					img1.width = w;
+				}
+			}
+			
+			function pclose(){
+				alert("欢迎");
+				
+			}
+		</script>
+	</body>
+	
+</html>

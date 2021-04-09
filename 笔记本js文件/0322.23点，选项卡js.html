@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				padding: 0rem;
+				margin: 0rem;
+			}
+
+			#box {
+				width: 18.75rem;
+				margin: 0px auto;
+				
+			}
+
+
+			#ul1 {
+				background: #1479d7;
+				overflow: hidden;
+			}
+
+			#ul1>li {
+				width: 4rem;
+				height: 2rem;
+				color: white;
+				float: left;
+				position: relative;
+				border: 0.0625rem solid #1469d7;
+				border-width: 0.0625rem 0.0625rem 0rem 0.0625rem;
+				text-align: center;
+				line-height: 2rem;
+				list-style-type: none;
+				display: inline-block;
+			}
+			#ul1>li:hover{
+				cursor: pointer;
+				background: #1469a7;
+			}
+			.ul2{
+				/* list-style-type: none; */
+				width:17.14rem;
+				background: skyblue;
+				font-size: 1.1rem;
+				padding: 0.3125rem;
+				padding-left: 1.3rem;
+				border: 0.0625rem solid black;
+				display: none;
+				position: absolute;
+			}
+			.ul2 li{
+				width: 100%;
+				height: 1.6rem;
+				line-height: 1.6rem;
+			}
+			.ul2:hover{
+				
+			}
+			a{
+				color: white;
+				text-decoration: none;
+				letter-spacing: 0.5px;
+			}
+			a:hover{
+				color: blue;
+			}
+		</style>
+		
+		<script type="text/javascript">
+			window.onload = function(){
+				var ul1Li = document.getElementById("ul1").children;
+				var showLi = document.getElementsByClassName("ul2");
+				var opened = 0;
+				
+				function closed(){
+					console.log("关闭"+opened);
+					showLi[opened].style.display = "none";
+					showLi[opened].onmouseover = function(){
+						this.style.display = "block";
+					}
+					showLi[opened].onmouseout = function(){
+						this.style.display = "none";
+					}
+				}
+				
+				function show(){
+					showLi[opened].style.display = "none";//关闭  opened 
+					
+// 					if(showLi[opened].onmouseover==true){
+// 						Console.log("不需要关闭");
+// 					}else{
+						// showLi[opened].style.display = "none";//关闭  opened 
+// 					}
+// 					showLi[opened].onmouseout = function(){
+// 						showLi[opened].style.display = "none";//关闭  opened 
+// 					}
+					
+// 					console.log("index = "+this.index);
+// 					console.log("show ="+showLi[this.index].style.display);
+					showLi[this.index].style.display = "block";
+					// showLi[this.index].addEventListener("mouseout",closed(this.index),false);
+					opened = this.index;
+					console.log("现在打开了 "+opened);
+					}
+					
+				
+// 				function close(){
+// 					for (var j=0;j<showLi.length;j++) {
+// 						showLi[j].style.display = "none";
+// 						console.log("循环全部已关闭");
+// 					}
+// 				}
+				
+				for(var i=0;i<ul1Li.length;i++){
+					ul1Li[i].index = i;
+					console.log("before for  i = "+i);
+					ul1Li[i].addEventListener("mouseover",show,false);
+					console.log("midle for  i = "+i);
+					console.log("opened = "+opened);
+					ul1Li[i].addEventListener("mouseout",closed,false);
+					
+					//移出时执行
+// 					ul1Li[i].onmouseout = function (){
+// 						showLi[this.index].style.display = "none";
+// 						console.log("移出立即关闭 ="+ this.index+"  "+this.style.diplay);
+// 					}
+
+
+					// ul1Li[i].addEventListener("mouseout",close,false);
+				}
+				console.log("ul1Li[0] ="+ul1Li[0]);
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<ul id="ul1">
+				<li>第一课</li>
+				<li>第二课</li>
+				<li>第三课</li>
+			</ul>
+			<ul class="ul2">
+				<li> <a href="#">当地时间晚6时30分许 </a> </li>
+				<li> <a href="#">意大利农业旅游部部长 </a></li>
+				<li> <a href="#">习近平代表中国政府 </a></li>
+				<li> <a href="#">向意大利政府和人民致以 </a></li>
+				<li> <a href="#">两国关系经受住时间和 </a></li>
+			</ul>
+			<ul class="ul2">
+				<li> <a href="#">不断推进中意友 </a> </li>
+				<li> <a href="#">成为不同社会制度、 </a></li>
+				<li> <a href="#">为两国人民带来了 </a></li>
+				<li> <a href="#">习近平和彭丽媛沿红地 </a></li>
+				<li> <a href="#">增进了彼此了解和友谊。 </a></li>
+			</ul>
+			<ul class="ul2">
+				<li> <a href="#">bbb111 </a> </li>
+				<li> <a href="#">bbb222 </a></li>
+				<li> <a href="#">bbb333 </a></li>
+				<li> <a href="#">bbb444 </a></li>
+				<li> <a href="#">bbb555 </a></li>
+				<li> <a href="#">bbb666 </a></li>
+				<li> <a href="#">bbb777 </a></li>
+				<li> <a href="#">bbb888 </a></li>
+			</ul>
+			<div id="" style="height: 20px; background: red;">
+				
+			</div>
+		</div>
+	</body>
+</html>

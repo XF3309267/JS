@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+
+		<style type="text/css">
+			li {
+				list-style: none;
+			}
+
+			#box1 {
+				width: 500px;
+				margin: 0 auto;
+				overflow: hidden;
+				zoom: 1;
+			}
+
+			#skin {
+				margin: 10px 0;
+			}
+
+			#skin,#ul1 {
+				overflow: hidden;
+				zoom: 1;
+			}
+
+			#skin li {
+				width: 0.625rem;
+				height: 0.625rem;
+				text-indent: -99999999px;
+				overflow: hidden;
+				border-width: 0.375rem;
+				border-style: solid;
+				margin-left: 10px;
+				float: left;
+			}
+
+			#red {
+				background: red;
+				border-color: red;
+			}
+
+			#green {
+				background: green;
+				border-color: green;
+			}
+
+			#black {
+				background: black;
+				border-color: black;
+			}
+
+			#div2 {
+				width: 600px;
+				margin: 0px auto;
+			}
+
+			#ul1 {
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			#ul1 li {
+				height: 25px;
+				width: 60px;
+				line-height: 25px;
+				border: 0.5px solid black;
+				color: white;
+				text-align: center;
+				list-style: none;
+				display: inline-block;
+				float: left;
+			}
+			
+			.current{
+				background: white!important;
+			}
+		</style>
+		
+		<link href="green.css" rel="stylesheet" type="text/css" />
+		
+		<script type="text/javascript">
+			window.onload = function()
+			{
+// 				var ul1Li = document.getElementById("ul1").childNodes;
+// 				
+// 				 console.log("Li[0] = "+ul1Li[4]);
+				var oLink = document.getElementsByTagName("link")[0];
+				var skinLi = document.getElementById("skin").childNodes;
+				for (var i = 0;i<skinLi.length;i++) {
+					
+					skinLi[i].onclick = function ()
+					{
+						
+						for (var p in skinLi ) {
+							skinLi[p].className = "";
+						}
+						this.className = "current";
+						var skinColor = this.id;
+						oLink['href'] = skinColor+".css";
+					}
+				}
+			}
+		</script>
+
+	</head>
+	<body>
+		<div id="box1">
+			<ul id="skin">
+				<li id="red" class="">红</li>
+				<li id="green" class="current">绿</li>
+				<li id="black" class="">黑</li>
+			</ul>
+			<ul id="ul1">
+				<li > 11</li>
+				<li >22</li>
+				<li >33</li>
+				<li >44</li>
+				<li >55</li>
+				<li >66</li>
+			</ul>
+		</div>
+
+
+	</body>
+</html>

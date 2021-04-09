@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>typeof</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="#">
+    <style>
+        #box input{
+            width: 5rem;
+        }
+        /*
+            小结： 能对输入框进行限制（限制为只能输入 数字），但就不能输入符号（+、-）
+                   不加以限制用户就可以随便输入字符
+         */
+    </style>
+    <script src="#"></script>
+    <script>
+        window.onload = function(){
+            var box = document.getElementById("box");
+            var inputChild = box.getElementsByTagName("input");
+            var BT = inputChild[inputChild.length-1];
+            console.log("BT = "+BT);
+            var strongChild = box.getElementsByTagName("strong");
+            var strongLast = strongChild[strongChild.length-1];
+            console.log("strongLast = "+ strongLast);
+            var arrayobj = new Array();
+            var sum=0;
+            for (let j = 0; j < inputChild.length; j++) {
+                console.log(" inputChild[j] = "+ inputChild[j]);
+                // 判断是否是输入框，并对输入框进行 限制（且是在用户输入的同时）
+                inputChild[j]['type']=='text'&&(inputChild[j].oninput = function(){ 
+                    // this.value=this.value.replace(/[^\d]/g,'');
+                    
+                    arrayobj[j] =  Number(this.value) ;
+                     console.log("  inputChild[j].value  >>>"+inputChild[j].value);
+                    // sum +=Number(inputChild[j].value);
+                    // console.log("sum = "+sum);
+                    });
+            }
+            // document.onkeydown = function(){
+            // var oEvent = window.event;
+            //     if (oEvent.keyCode ==100) {
+    		//     alert("刚刚按下的是 ctrl + alt + m 组合键");
+            // }}
+            BT.onclick  = function(){
+                for (let k = 0; k < arrayobj.length; k++) {
+                    sum+= arrayobj[k];
+                }
+                if(sum==0){
+                    alert("请输入数字");
+                }
+                strongLast.innerHTML = sum;
+            }
+            //console.log("sum = "+sum);
+            //console.log("typeof 123456   "+typeof 123456);
+            //console.log("typeof \"abc\"   "+typeof "abc");
+            //console.log("typeof document    "+ typeof document);
+        }
+    </script>
+</head>
+<body>
+    <ul id="box">
+        <input type="text" >
+        <strong>+</strong>
+        <!-- <h3>+</h3> -->
+        <input type="text" >
+        <strong>=</strong>
+        <strong>？</strong>
+        <input type="button" value="求和">
+    </ul>
+</body>
+</html>

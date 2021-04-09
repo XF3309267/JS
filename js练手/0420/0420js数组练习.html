@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>数组练习例子</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="stylesheet" href=""> -->
+        <style>
+            #box{
+                width: 200px;
+                margin: 20px auto;
+            }
+        </style>
+        <script>
+            window.onload = function(){
+                var ulList = document.querySelector('#box ul');
+                var pList = document.querySelector('#box p');
+                var total = 0;
+                var product = [];
+                var jg = [];
+                pList.textContent = '';
+                var productStr = [ 'Underpants:6.99',
+                'Socks:5.99',
+                'T-shirt:14.99',
+                'Trousers:31.99',
+                'Shoes:23.99',];
+                for (let i = 0; i < productStr.length; i++) {
+                    const element = productStr[i];
+                    var result = element.split(':');
+                    product.pop(result[0]);
+                    jg.pop(Number(result[1]));
+                    var itemText = product[i]+" - $"+jg[i];
+                    console.log(sfsd);
+                    
+                    var listItem = document.createElement('li');
+                    listItem.textContent = itemText;
+                    ulList.appendChild(listItem);
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div id="box">
+            <ul>
+
+            </ul>
+            <p></p>
+        </div>
+        <!-- <script src="" async defer></script> -->
+    </body>
+</html>

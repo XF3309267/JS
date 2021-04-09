@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> css animation </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+    <style>
+        .show {
+            width: 50%;
+            height: 550px;
+            padding: 1px;
+            margin: 10px auto;
+            /* border: 1px solid black; */
+            /* border-right: transparent; */
+        }
+        
+        .img {
+            width: 200px;
+            position: relative;
+            top: 50px;
+            left: 70px;
+            transform: rotate(0deg);
+            box-shadow: 0px 0px 8px 4px rgb(196, 195, 195);
+            animation: move 1s steps(4, end);
+        }
+        
+        @keyframes move {
+            /* 0% {
+                top: 300px;
+                left: 700px;
+                transform: rotate(-90deg);
+            }
+            50% {
+                transform: rotate(-180deg);
+            }
+            75% {
+                transform: rotate(-270deg);
+            }
+            100% {
+                top: 50px;
+                left: 70px;
+                transform: rotate(-360deg);
+            } */
+            from {
+                top: 300px;
+                left: 700px;
+                transform: rotate(-90deg);
+            }
+            to {
+                top: 50px;
+                left: 70px;
+                transform: rotate(-360deg);
+            }
+        }
+        
+        .typing {
+            width: 15em;
+            white-space: nowrap;
+            border-right: 2px solid transparent;
+            animation: typing 3.5s steps(15, end), blink-caret .75s step-end infinite;
+            overflow: hidden;
+        }
+        /* 打印效果 */
+        
+        .vk {
+            width: 80px;
+            height: 20px;
+            animation: gl 2s step-end;
+        }
+        
+        @keyframes gl {
+            from,
+            to {
+                background-color: red;
+            }
+            50% {
+                background-color: black;
+            }
+        }
+        
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 15em;
+            }
+        }
+        /* 光标闪啊闪 */
+        
+        @keyframes blink-caret {
+            from,
+            to {
+                box-shadow: 1px 0 0 0 transparent;
+            }
+            50% {
+                box-shadow: 1px 0 0 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="show">
+        <!-- <img src="pic2.jpg" class="img" alt=""> -->
+        <p class="typing">简易中文打字效果，作者：张鑫旭</p>
+        <!-- <div class="vk"></div> -->
+    </div>
+</body>
+
+</html>

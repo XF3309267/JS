@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Canvans</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="#">
+        <style>
+            #box{
+                width: 200px;
+                height: 200px;
+                margin: 20% auto;
+            }
+        </style>
+
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div id="box">
+            <canvas width="200" height="200" id="can"> </canvas>
+        </div>
+        
+        <script src="#" async defer></script>
+        <script>
+            var canvans = document.getElementById("can");
+            var cont = canvans.getContext('2d');
+            // cont.fillStyle = "green";
+            cont.strokeStyle = "red";
+
+            // cont.fillRect(0,50,100,100);
+            // cont.strokeRect(50,50,100,100);
+
+            // cont.beginPath();
+            // cont.moveTo(70,140);
+            // cont.lineTo(140,70);
+            cont.stroke();
+
+
+            cont.beginPath();
+            cont.fillStyle = "#FFF";
+            cont.strokeStyle = "#c00";
+            cont.moveTo(75,40);
+            cont.bezierCurveTo(75,37,70,25,50,25);
+            cont.bezierCurveTo(20,25,20,62.5,20,62.5);
+            cont.bezierCurveTo(20,80,40,102,75,120);
+            cont.bezierCurveTo(110,102,130,80,130,62.5);
+            cont.bezierCurveTo(130,62.5,130,25,100,25);
+            cont.bezierCurveTo(85,25,75,37,75,40);
+            cont.fill();
+            cont.stroke();
+            window.addEventListener("load",drawDiagonal,true);    
+        </script>
+    </body>
+</html>

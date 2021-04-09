@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<style>
+			#div1{
+				width: 100px;
+				height: 100px;
+				background-color: yellow;
+				display: block;
+				margin: 0px auto;
+			}
+			#div2{
+				text-align: center;
+			}
+		</style>
+		
+		<script>
+			
+			function changrStyle (elem,attr,value){
+				elem.style[attr] = value;
+			}
+			
+			window.onload = function(){
+				console.log("window.onload>>function()");
+				var div = document.getElementById("div1");
+				var bt = document.getElementsByTagName("input");
+				var shux = [
+					"width",
+					"height",
+					"background-color",
+					"display",
+					"display"
+				];
+				var gxz = [
+					"200px",
+					"200px",
+					"red",
+					"none",
+					"block"
+				];
+				var x = 1;
+				for(var i = 0; i < bt.length; i++){
+// 					console.log("在for循环中》》"+x+"==="+i);
+// 					x+=1;
+
+					bt[i].index = i;
+					bt[i].onclick = function(){
+						console.log("点击, i = "+i);
+						this.index ==bt.length - 1 && (div.style.cssText = "");
+						changrStyle(div,shux[this.index],gxz[this.index]);
+					}
+				}
+				
+				
+				console.log("结束");
+			}
+		</script>
+		
+	</head>
+	<body>
+		<div id="div2">
+			<input type="button" value="变宽">
+			<input type="button" value="变高">
+			<input type="button" value="变色">
+			<input type="button" value="隐藏">
+			<input type="button" value="重置">
+		</div>
+		<div id="div1">
+			
+		</div>
+	</body>
+</html>

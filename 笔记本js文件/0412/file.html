@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>file</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+    <script>
+        var i = 0;
+
+        function show() {
+            console.log("iIIIIIIIIIIIIIIIIIIIIIIIII");
+            var file;
+            if (i < document.getElementById("file").files.length) {
+
+                file = document.getElementById("file").files[i];
+                console.log(file.name);
+                console.log("文件字节长度： " + file.size);
+                console.log("文件类型： " + file.type);
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function(e) {
+                    var result = document.getElementById("result");
+                    result.innerHTML = '<img src = "' + this.result + '"alt="">';
+                }
+                i++;
+            }
+
+        }
+
+        function ShowName() {
+            // if (typeof FileReader == 'underfined') {
+            //     alert("Donot have inner");
+
+            // } else {
+            //     var reader = new FileReader();
+            //     alert("OK");
+            // } var file;
+
+            for (var j = i; j < 10; j++) {
+                console.log("forFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF    " + i);
+            }
+            if (i < document.getElementById("file").files.length) {
+                setInterval("show()", 3000);
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <input type="file" id="file" multiple size="50" accept="text/*">
+    <input type="button" onclick="ShowName(); " value="上传文件">
+    <span id="result"></span>
+</body>
+
+</html>

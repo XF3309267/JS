@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        .box {
+            width: 400px;
+            height: 200px;
+            border: 1px solid black;
+            padding: 20px;
+            margin: 20px auto;
+        }
+    </style>
+    <!-- 
+		XXX.slice(star,end);         >>>>>>    xxx 本身的值不改变
+
+		A》》》》 star 可取 ，end 不可取。  
+		B》》》》 可以不需要 end ，slice（1） 从该位开始取，取至最后一位
+		C》》》》 star 、 end 都可为负数，  -1 即是最后一位
+		D》》》》 无论 star 或 end  数字是多少，他们代表的仅仅是所在的 位置 （即第几位）
+		
+		star 
+	 -->
+
+</head>
+
+<body>
+    <div class="box">
+        <h4> 数字转化为汉字代写</h4>
+        <input type="text" value="" class="text">
+        <input type="button" value="确定" class="bt">
+    </div>
+    <script type="text/javascript">
+        var bigresult = "";
+        // zdx 函数 将阿拉伯数字 转化为 大写中文汉字，num 为阿拉伯数字，
+        //  返回 大写汉字
+        function zdx(num) {
+            switch (num) {
+                case "0":
+                    return "零";
+                case "1":
+                    return "壹";
+                case "2":
+                    return "贰";
+                case "3":
+                    return "叁";
+                case "4":
+                    return "肆";
+                case "5":
+                    return "伍";
+                case "6":
+                    return "陆";
+                case "7":
+                    return "柒";
+                case "8":
+                    return "捌";
+                case "9":
+                    return "玖";
+                default:
+                    {
+                        alert("数字输入有误！");location.reload();
+                    };
+            }
+        }
+        // 根据数字所在位置进行返回单位，index 即 该数字所在的 位数 ，（百位 、 千位 、。。。。）
+        function zdxx(index) {
+            console.log("index = " + index);
+            var re = "";
+            switch (index) {
+                case 9:
+                    return "亿";
+                case 4:
+                    return "仟";
+                case 3:
+                    return "佰";
+                case 2:
+                    return "拾";
+                case 1:
+                    return "";
+                default:
+                    {
+                        alert("输入有误！");location.reload();
+                    };
+            }
+        }
+
+        function weiShu(numb, index) {
+            var numm = zdx(numb);
+            var dw = zdxx(index);
+            //console.log("weishu>>> num = "+num);
+            console.log("weishu>>> dw = " + dw);
+            if (numm == "零") {
+                dw = "";
+            }
+            //console.log("num+dw>>>  = "+num+dw);
+            return numm + dw;
+        }
+
+        // 明确知道高于位了才可以这么算
+        function zhu(num) {
+            //var num = window.prompt("输入要转换的金额：")-0+"";
+            var oldNum = "";
+            var Jw = false;
+            var numm = "";
+            var dw;
+            var result = "";
+            console.log("num.lenght = " + num.length);
+            for (let i = 0; i < num.length; i++) {
+                numm = zdx(num[i]);
+                dw = zdxx(num.length - i);
+                if (numm == "零") {
+                    //如果是零,取消 单位 的显示
+                    dw = "";
+                }
+                if (oldNum == numm && numm == "零") {
+                    console.log(i + "  and  " + i - 1 + "  都为零 ");
+                    result += "";
+                    console.log("判断出两个连续的零");
+                    continue;
+                }
+                result += numm + dw;
+                // 下面这种情况只能 检验到 单独的 0 的出现
+                oldNum = numm;
+                if (result[(result.length - 1)] == "零") {
+                    result = result.substr(0, result.length - 1);
+                    console.log("删除后  " + result);
+                }
+            }
+            // console.log("i ==" + i);
+            // console.log("result >>>>>>>>" + result);
+            //document.write("\t     "+num+ "  转换的结果为： "+result);
+            return result;
+            // console.log("result = " + result);
+            // console.log("num typeof = " + typeof(num));
+
+        }
+
+        // 亿 位 转换，（原理：利用 slice（0,num.length-8）取亿位）
+        function transfromYi(num) {
+            var strY = zhu(num.slice(0, num.length - 8));
+            if (strY != "") {
+                strY += "亿";
+            }
+            return strY;
+        }
+
+        // 万 位 转换，（原理：利用 slice（-8，-4）取万位）
+        function transfromWan(num) {
+            var strW = zhu(num.slice(-8, -4));
+            //  
+            console.log("strW ==" + strW);
+            if (strW != "") {
+                strW += "万";
+            }
+            return strW;
+        }
+
+        // 千 百 十 个 位 转换，（原理：利用 slice（-4）取后四位）
+        function transfromGe(num) {
+            var strqq = zhu(num.slice(-4)) + "元整";
+            return strqq;
+        }
+
+        // 打印结果
+        function show(num) {
+            console.log("show result = " + bigresult);
+            if (bigresult == "元整") {
+                bigresult = "零元整";
+            }
+            document.write("\t     " + num + "  转换的结果为： " + bigresult);
+        }
+
+        function panDuanValue(val) {
+            // 去除空格
+            var str = val._.replace(/(^\s*)|(\s*$)/g, '');
+            if (str == '' || str == undefined || str == null) {
+                console.log("空");
+            }
+        }
+        // 转换
+
+        function main() {
+            var text = document.getElementsByTagName("input")[0];
+            var te = text.value;
+            var butto = document.querySelector("input.bt");
+            // console.log("text = " + text);
+
+            // butto.onclick = function() {
+
+            var yiLevel = '';
+            var wanLevel = '';
+            var geLevel = '';
+
+            // console.log("text.value = " + text.value);
+
+            butto.onclick = function() {
+                num = text.value;
+                console.log("num = " + num);
+                console.log("typeof num =" + typeof(num));
+                if (num == '' || num == null || num == undefined) {
+                    alert("您还没有输入呢");
+                    location.reload();
+                }
+                if (Number(num) == undefined) {
+                    alert("输入仅有数字")
+                }
+                geLevel = transfromGe(num);
+                console.log("geLevel =" + geLevel);
+
+                if (num.length > 4) {
+                    wanLevel = transfromWan(num);
+                    console.log("wanLevel =" + wanLevel);
+                }
+                if (num.length > 8) {
+                    yiLevel = transfromYi(num);
+                    console.log("yiLevel =" + yiLevel);
+                }
+
+                bigresult = yiLevel + wanLevel + geLevel;
+                console.log("result = " + bigresult);
+                show(num);
+            }
+
+        }
+
+        // var num = window.prompt("请输入");
+
+        // }
+        main();
+    </script>
+</body>
+
+</html>

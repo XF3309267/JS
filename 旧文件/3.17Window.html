@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	
+	<script>
+// 		alert("nihao");
+// 		window.alert("Hello World");
+
+// 		var bool = confirm("是否关闭窗口");
+// 		alert("bool = "+bool);
+// 		if(bool == true){
+// 			window.close();
+// 		}
+
+		// prompt("请输入","nihao");
+		
+// 		function rdl_doClick(){
+// 			var mes = document.all("me");
+// 			mes.value = window.prompt(mes.value,"返回的信息");
+// 			
+// 		}
+		
+		<!--
+// 		var win = window.open("0305.html","Hello ","width = 600,height = 300");
+// 		win.resizeTo(300,300);
+// 		alert("高度 = "+win.screen.availHeight);
+// 		alert(win.screen.availWidth);
+// 		alert("screen.width = "+win.screen.width);
+		// 
+		
+		// alert("screen.height = "+win.screen.height);
+		
+		var wh ,ws,x,win2;
+		function go1(){
+			wh = 100;
+			ws = 100;
+			x = 5;
+			win2 = window.open("0305.html","","width = 300,height = 300");
+			win2.moveTo(600,600);
+			 go2();
+			
+			
+		}
+		function  go2() {
+// 			if(wh>=screen.availHeight-3){
+// 				x = 0;
+// 			}
+// 			win2.resizeTo(5,x);
+// 			wh+= 5;
+// 			ws+= 5; 
+// 			if ( ws>= screen.width-5) {
+// 				wh = 100;
+// 				ws = 100;
+// 				x = 5;
+// 				return;
+// 				
+
+// 			} 
+			win2.resizeBy(5,5);
+			setTimeout("go2()",50);
+		}
+		
+		-->
+	</script>
+	
+	</head>
+	<body>
+		<input type="button" name="" id="" value="" onclick="go1()"/>
+		<!-- <input type="text" name="" id="mes" value="请在此输入信息" />
+		<br>
+		<input type="text" name="" id="me" value="请在" />
+		<br>
+		<input type="button" name="" id="" value="显示对话框" onclick="rdl_doClick()" /> -->
+	</body>
+</html>

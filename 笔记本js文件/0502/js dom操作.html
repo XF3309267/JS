@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> js dom 操作</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+        
+        #box {
+            width: 400px;
+            height: 400px;
+            margin: 20px auto;
+            border: 1px solid black;
+            padding: 9px;
+        }
+        
+        .headTitle {
+            padding-bottom: 30px;
+        }
+        
+        .inputText {
+            padding-bottom: 10px;
+        }
+        
+        .button {
+            color: #666;
+            background-color: #EEE;
+            border-color: #EEE;
+            font-weight: 300;
+            font-size: 16px;
+            font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            text-decoration: none;
+            text-align: center;
+            line-height: 40px;
+            height: 40px;
+            padding: 0 40px;
+            margin: 0;
+            /* inline-block 可以使 button 随意放置 */
+            display: inline-block;
+            appearance: none;
+            cursor: pointer;
+            border: none;
+            /* 
+                box-sizing: border-box;
+                当设置了 width 时，padding border 的宽度都会在 width 内占取
+                这里的 width 是指 整个元素 的宽度
+
+                box-sizing: content-box;  
+                当设置了 width 时，padding border 的宽度会在额外增加，不会占取 width 的部分，但会是整个元素的宽度增加
+                这里的 width 是指 整个content 的宽度（content 就是除了  padding 和 border 俩个属性之外的，在元素里，或原先设有的width ）
+             */
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            /* 所有属性 都遵循 */
+            -webkit-transition-property: all;
+            transition-property: all;
+            -webkit-transition-duration: .3s;
+            transition-duration: .3s;
+            /*
+  * Disabled State
+  *
+  * The disabled state uses the class .disabled, is-disabled,
+  * and the form attribute disabled="disabled".
+  * The use of !important is only added because this is a state
+  * that must be applied to all buttons when in a disabled state.
+  */
+        }
+        
+        .button:visited {
+            color: #666;
+        }
+        
+        .button:hover,
+        .button:focus {
+            background-color: #f6f6f6;
+            text-decoration: none;
+            outline: none;
+        }
+        
+        .button:active,
+        .button.active,
+        .button.is-active {
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+            text-decoration: none;
+            background-color: #eeeeee;
+            border-color: #cfcfcf;
+            color: #d4d4d4;
+            -webkit-transition-duration: 0s;
+            transition-duration: 0s;
+            -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        /*  当 button 被设置为/ disabled 或者 元素的 class 设置为  disabled 或者 is-disabled */
+        
+        .button.disabled,
+        .button.is-disabled,
+        .button:disabled {
+            top: 0 !important;
+            background: #EEE !important;
+            border: 1px solid #DDD !important;
+            text-shadow: 0 1px 1px white !important;
+            color: #CCC !important;
+            cursor: default !important;
+            appearance: none !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            opacity: .8 !important;
+        }
+        
+        .button-primary,
+        .button-primary-flat {
+            background-color: #1B9AF7;
+            border-color: #1B9AF7;
+            color: #FFF;
+        }
+        
+        .button-primary:visited,
+        .button-primary-flat:visited {
+            color: #FFF;
+        }
+        
+        .button-primary:hover,
+        .button-primary:focus,
+        .button-primary-flat:hover,
+        .button-primary-flat:focus {
+            background-color: #4cb0f9;
+            border-color: #4cb0f9;
+            color: #FFF;
+        }
+        
+        .button-primary:active,
+        .button-primary.active,
+        .button-primary.is-active,
+        .button-primary-flat:active,
+        .button-primary-flat.active,
+        .button-primary-flat.is-active {
+            background-color: #2798eb;
+            border-color: #2798eb;
+            color: #0880d7;
+        }
+        
+        .button-action,
+        .button-action-flat {
+            background-color: #A5DE37;
+            border-color: #A5DE37;
+            color: #FFF;
+        }
+        
+        .button-action:visited,
+        .button-action-flat:visited {
+            color: #FFF;
+        }
+        
+        .button-action:hover,
+        .button-action:focus,
+        .button-action-flat:hover,
+        .button-action-flat:focus {
+            background-color: #b9e563;
+            border-color: #b9e563;
+            color: #FFF;
+        }
+        
+        .button-action:active,
+        .button-action.active,
+        .button-action.is-active,
+        .button-action-flat:active,
+        .button-action-flat.active,
+        .button-action-flat.is-active {
+            background-color: #a1d243;
+            border-color: #a1d243;
+            color: #8bc220;
+        }
+        
+        .button-highlight,
+        .button-highlight-flat {
+            background-color: #FEAE1B;
+            border-color: #FEAE1B;
+            color: #FFF;
+        }
+        
+        .button-highlight:visited,
+        .button-highlight-flat:visited {
+            color: #FFF;
+        }
+        
+        .button-highlight:hover,
+        .button-highlight:focus,
+        .button-highlight-flat:hover,
+        .button-highlight-flat:focus {
+            background-color: #fec04e;
+            border-color: #fec04e;
+            color: #FFF;
+        }
+        
+        .button-highlight:active,
+        .button-highlight.active,
+        .button-highlight.is-active,
+        .button-highlight-flat:active,
+        .button-highlight-flat.active,
+        .button-highlight-flat.is-active {
+            background-color: #f3ab26;
+            border-color: #f3ab26;
+            color: #e59501;
+        }
+        
+        .button-circle,
+        .button-box,
+        .button-square {
+            padding: 0 !important;
+            width: 40px;
+        }
+        
+        .button-circle.button-giant,
+        .button-box.button-giant,
+        .button-square.button-giant {
+            width: 70px;
+        }
+        
+        .button-circle.button-jumbo,
+        .button-box.button-jumbo,
+        .button-square.button-jumbo {
+            width: 60px;
+        }
+        
+        .button-circle.button-large,
+        .button-box.button-large,
+        .button-square.button-large {
+            width: 50px;
+        }
+        
+        .button-circle.button-normal,
+        .button-box.button-normal,
+        .button-square.button-normal {
+            width: 40px;
+        }
+        
+        .button-circle.button-small,
+        .button-box.button-small,
+        .button-square.button-small {
+            width: 30px;
+        }
+        
+        .button-circle.button-tiny,
+        .button-box.button-tiny,
+        .button-square.button-tiny {
+            width: 24px;
+        }
+        
+        .button-3d {
+            position: relative;
+            top: 0;
+            -webkit-box-shadow: 0 7px 0 #bbbbbb, 0 8px 3px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 7px 0 #bbbbbb, 0 8px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .button-3d:hover,
+        .button-3d:focus {
+            -webkit-box-shadow: 0 7px 0 #bbbbbb, 0 8px 3px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 7px 0 #bbbbbb, 0 8px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .button-3d:active,
+        .button-3d.active,
+        .button-3d.is-active {
+            top: 5px;
+            -webkit-transition-property: all;
+            transition-property: all;
+            -webkit-transition-duration: .15s;
+            transition-duration: .15s;
+            -webkit-box-shadow: 0 2px 0 #bbbbbb, 0 3px 3px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 0 #bbbbbb, 0 3px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .button-3d.button-primary {
+            -webkit-box-shadow: 0 7px 0 #0880d7, 0 8px 3px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 7px 0 #0880d7, 0 8px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .button-3d.button-primary:hover,
+        .button-3d.button-primary:focus {
+            -webkit-box-shadow: 0 7px 0 #077ace, 0 8px 3px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 7px 0 #077ace, 0 8px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .button-3d.button-primary:active,
+        .button-3d.button-primary.active,
+        .button-3d.button-primary.is-active {
+            -webkit-box-shadow: 0 2px 0 #0662a6, 0 3px 3px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 0 #0662a6, 0 3px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .button1 {
+            /* ba1ckground-color: white;
+            border: 1px solid grey;
+            border-radius: 3px; */
+            top: 0px;
+            /* transition: top 3s; */
+            /* transition: text 3s;
+            transition: box 2s; */
+            color: #fff;
+            border: 0;
+            font-size: 18px;
+            outline: none;
+            padding: 5px 10px;
+            background: rgb(83, 151, 240);
+            border-radius: 4px;
+            /* 设置文字阴影 */
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
+            /* 设置盒子阴影 */
+            box-shadow: 0 7px 0 rgb(70, 125, 245), 0 3px 20px rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: 0 7px 0 rgb(70, 125, 245), 0 3px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .button1:hover {
+            cursor: pointer;
+            /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.2) inset;
+            -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2) inset; */
+        }
+        
+        .button1:active {
+            transition-property: all;
+            -webkit-transition-property: all;
+            -webkit-transition-duration: 0.1s;
+            transition-duration: 0.1s;
+            transition-timing-function: linear;
+            /* transition-property: all;
+            -webkit-transition-property: all;
+            -webkit-transition-duration: 0.5s;
+            transition-duration: 0.5s; */
+            /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.2) inset;
+            -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2) inset; */
+            box-shadow: 0 2px 0 rgb(70, 125, 245), 0 3px 20px rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: 0 2px 0 rgb(70, 125, 245), 0 3px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            top: 5px;
+            box-shadow: 0 2px 0 rgb(70, 125, 245), 0 3px 20px rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: 0 2px 0 rgb(70, 125, 245), 0 3px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            top: 5px;
+            /* background-color: white;
+            border: 1px solid grey;
+            border-radius: 3px; */
+            /* background: #ace;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
+          
+            box-shadow: 0 4px 0 #9cb8d8, 0 3px 20px rgba(0, 0, 0, 0.3); */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <h1 class="headTitle">
+            My shopping list
+        </h1>
+        <div class="inputText">
+            <strong>
+                Enter a new item: 
+            </strong>
+            <input type="text">
+            <a href="#" class="button button-primary ">
+                GO
+            </a>
+            <a href="#" class="button  button-3d button-primary"> 
+                GO1
+            </a>
+            <input type="button" value="GO" class="button button-primary">
+            <input type="button" value="GO" class="button1">
+        </div>
+
+    </div>
+    <script>
+    </script>
+</body>
+
+</html>

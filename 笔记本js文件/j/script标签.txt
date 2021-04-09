@@ -1,0 +1,13 @@
+Script 标签
+1. 当使用script 标签时，<script> 标签嵌入代码时，不允许在代码中的任何地方输出“</script>”字符串。例如在代码中有： document.write(“</script>”);(应该写成（“<\/script>”）,用转义字符)
+2. 在引用外部js文件时，外部文件扩展名 .js .可以不需要，浏览器会检查包含 JavaScript 的文件的扩展名，但应确保服务器能返回正确的MIME类型。
+3. <script  type = “text/javascript”  src = “test.js”> </script>,该标签（即含有src 属性的script 标签）中不能继续添加js 代码；，添加了也会被忽略。
+4. Script  有6个属性，分别是：
+a) async >可选，表示立即下载脚本，但不妨碍页面中其他操作，如下载资源等，只对外部js文件有效。
+b) Charset >可选，表示通过src 属性指定的代码的字符集。大多数浏览器忽略它的值，很少使用。
+c) Defer > 可选，表示脚本可以延迟到文档完全被解析和显示后再执行。只对外部js 文件有效，且更早的版本对嵌入式 js代码也支持。
+d) Language >已废弃，表示编写代码的脚本语言，如 JavaScript，JavaScript 1.2，VBScript,大多数浏览器忽略该属性。
+e) Src > 可选，表示包含执行代码的外部文件
+f) Type> 可选，表示编写代码使用的脚本语言的内容类型（也称 MIME 类型），目前在非IE 浏览器中还可以使用 application/x-javascript，但在type中设置该值可能会导致脚本被忽略。目前在客户端，type属性值一般使用 text/javascript。默认值也为 text/javascript。
+脚本的位置
+	所有的 script 标签会按照它在 HTML 中出现的顺序依次被解析。Head 标签包含 JavaScript 文件，意味着必须等JavaScript代码被下载、解析、执行后，才能开始呈现页面内容。为了避免此类事情发生，现代Web 应用程序一般把 JavaScript 引用放在 <body> 标签中页面内容的后面

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<style type="text/css">
+			*{
+				padding: 0rem;
+				margin: 0rem;
+			}
+			
+			#box{
+				text-align: center;
+			}
+			
+			#box1{
+				text-align: center;
+				
+			}
+			
+			#BT{
+				width: 5rem;
+				margin: 20px 0px;
+			}
+			
+			#box li{
+				display: inline-block;
+				width: 6.25rem;
+				height: 6.25rem;
+				background:black ;
+			}
+			
+			
+			
+		</style>
+		
+		<script type="text/javascript">
+			function btt(){
+				var box1Li = document.getElementById("box1").getElementsByTagName('li');
+				for (var i=0;i<box1Li.length;i++) {
+					console.log("boxLi = "+ box1Li[i]);
+					console.log("box1Li["+i+"].background ="+box1Li[i]['background']);
+					
+					box1Li[i].style.background= "red";
+					
+					// box1Li[i].setAttribute("background","red");
+					//console.log("box1Li[i].getColor = "+box1Li[i].getAttribute("background");)
+					console.log("for");
+				}
+			}
+		</script>
+		
+	</head>
+	<body>
+		<div id="box">
+			<button id="BT" onclick="btt()"> 改变颜色 </button>
+			<ul id="box1">
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		
+		
+	</body>
+</html>
