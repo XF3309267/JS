@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button onclick="fun()" id="btn" style="background-color: green;"> btn</button>
+  
+  <script>
+    let btn = document.getElementById('btn')
+    function fangd(fun,time=500){
+      let timer
+      // later 函数用以重置 setTimeout 
+      //        或者说 用以重置定时标识，
+      //        在全局中设置一个 timer 变量，用以标识 set
+      // let later = ()=>{
+      //   return(
+      //     setTimeout(()=>{
+      //       console.log('################')
+      //       timer = null
+      //       btn.style.backgroundColor = "red"
+      //     },1000)
+      //   )
+      // }
+      let debounced = function (...params){
+        let context = this
+        let args = params
+        clearTimeout(timer)
+        timer =  setTimeout(()=>{
+          console.log('################')
+          fun.apply(context,args)
+        },1000)
+      }
+      return debounced
+    }
+    function cli(){
+      console.log('click')
+    }
+    let fun = fangd(cli,1000)
+  </script>
+</body>
+</html>

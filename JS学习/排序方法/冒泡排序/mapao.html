@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    text{
+      font-size: 2em;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+    <div id="divBox"> 
+       
+    </div>
+    <div id="divBox1"> 
+       
+    </div>
+  <script>
+    const divBox = document.getElementById('divBox')
+    const divBox1 = document.getElementById('divBox1')
+
+
+
+    let adomArr = randomArr(0,20,9)
+    console.log(adomArr)
+
+    let mergeArr = mergeSort(adomArr)
+    showNewArr(mergeArr)
+    
+    // 生成随机数组
+    function randomArr(min,max,arrLength=5){
+      let newArr = []
+      for (let index = 0; index < arrLength; index++) {
+        let ele = Math.random()*max + min
+        ele = parseInt(ele)
+        let textNode = document.createElement('text')
+        textNode.innerHTML = ele
+        divBox.append(textNode)
+        newArr.push(ele) 
+      }
+      return newArr
+    }
+    function showNewArr(arr){
+      for (let index = 0; index < arr.length; index++) {
+        let ele = arr[index]
+      
+        let textNode = document.createElement('text')
+        textNode.innerHTML = ele
+        divBox1.append(textNode)
+        
+      }
+    }
+
+  // function mergeSort  的用途 
+
+  // 递归方法 必须有返回值
+  //  1. 将 数组等分为 
+  //  2. 将 分开的数组排序 
+  //  返回值：  返回排序后的数组
+
+
+  // 
+
+function mergeSort(arr) {
+    var len = arr.length;
+    if (len < 2) {
+        return arr;
+    }
+    var middle = Math.floor(len / 2),
+        left = arr.slice(0, middle),
+        right = arr.slice(middle);
+    return merge(mergeSort(left), mergeSort(right));
+}
+ 
+function merge(left, right) { 
+    var result = [];
+ 
+    while (left.length>0 && right.length>0) {
+        if (left[0] <= right[0]) {
+            result.push(left.shift());
+        } else {
+            result.push(right.shift());
+        }
+    }
+ 
+    while (left.length)
+        result.push(left.shift());
+ 
+    while (right.length)
+        result.push(right.shift());
+    return result;
+}
+  </script>
+</body>
+</html>

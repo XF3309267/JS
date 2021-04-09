@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax</title>
+    	
+    
+    <style>
+        .container{
+            /* display: flex; */
+            width: 1200px;
+            margin: 20px auto;
+        }
+        .img_container{
+            display: flex;
+            flex-flow: row wrap;
+            width: 100%;
+        }
+        .showContent{
+            border: 5px solid black;
+        }
+        img{
+            width: 100%;
+            height: auto;
+        }
+        .img_column{
+            display: block;
+            width:392px;
+            
+        }
+        .img_container .img_column:not(:last-child){
+            padding-right: 12px;
+        }
+        .img_item{
+            width: 370px;
+            height: auto;
+            margin: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button onclick="handlClick()"> 发送请求 </button>
+        <div class="showContent">
+            <!-- <div class="img-item">
+
+            </div> -->
+        </div>
+        <div class="img_container">
+            <div class="img_column "></div>
+            <div class="img_column"></div>
+            <div class="img_column"></div>
+        </div>
+        <!-- <img src="" id="img" class="img-item" alt=""> -->
+        <!-- <img class="img-item" src="https://images.pexels.com/photos/1804796/pexels-photo-1804796.jpeg?cs=srgb&dl=pexels-1804796.jpg&fm=jpg   " alt=""> -->
+    </div>
+    <!-- 
+        readyState      状态值
+        status          响应码
+     -->
+    <script src="./jquery.js"></script>
+
+    <script>
+            let http 
+            let setintervalThing
+            let showContent = document.querySelector('#showContent')
+            let lineSrc = 'https://images.pexels.com/photos/962784/pexels-photo-962784.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
+            let lineSrcs = [
+                // 'https://cdn.jsdelivr.net/gh/XF3309267/imgs/website-imgf4131bc77889e084f2b3648261cc43df.jpg',
+                'https://images.pexels.com/photos/962784/pexels-photo-962784.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
+                'https://images.pexels.com/photos/845242/pexels-photo-845242.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
+                'https://images.pexels.com/photos/2444429/pexels-photo-2444429.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
+                'https://images.pexels.com/photos/1435075/pexels-photo-1435075.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+                'https://images.pexels.com/photos/1831817/pexels-photo-1831817.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+                'https://images.pexels.com/photos/4608723/pexels-photo-4608723.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+                'https://images.pexels.com/photos/3046632/pexels-photo-3046632.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
+                'https://images.pexels.com/photos/4850412/pexels-photo-4850412.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+                'https://images.pexels.com/photos/1472761/pexels-photo-1472761.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+            ]
+            function createAjaxObj(){
+                let httpRequest = new XMLHttpRequest( )
+                if(window.XMLHttpRequest){
+                    httpRequest = new XMLHttpRequest( )
+                }else if(window.ActiveXObject){
+                    httpRequest = new ActiveXObject("Microsoft.XMLHTTP")
+                }
+                return httpRequest
+            }
+            
+
+            function showData(){
+                if(http.readyState === XMLHttpRequest.DONE){
+                    let i = 1
+                    let colulmns = $('.img_column')
+                    let columnsArray = [colulmns[0],colulmns[1],colulmns[2]]
+                    let colorList = ['#897A5A','#D2D4C2','#AFA28D','#CDD5D6']
+                    if(http.status === 200){
+                        lineSrcs.forEach(function(item,index){
+                            let img_item = $('<div>')
+                            let imgEle = $('<img />')
+                            let num = index%3
+                            $(img_item).attr({class:"img_item",style:"background-color:"+colorList[index%4]})
+                            $(img_item).append(imgEle)
+                            $(columnsArray[num]).append($(img_item))
+                            $(imgEle).attr("src",item).bind('load',function(){
+                                $('.showContent').append("<h2> success  </h2>");
+                                clearTimeout(setintervalThing);
+                            })
+                        })
+                    }
+                }
+            }
+
+            function handlClick(){
+                $('.showContent').html("<h2> loading...  </h2>")
+                let time = 0
+                setintervalThing = setInterval(function(){
+                    $('.showContent').html(++time)
+                },1000)
+                http = createAjaxObj()
+                http.onreadystatechange = showData
+                http.open('GET',lineSrc,true)
+                http.send()
+            }
+
+            function getImgInfo(http,urlArray){
+                urlArray.forEach(function(item){
+                    http.open('GET',item,true)
+                })
+            }
+        
+            function createHttp(){
+                let http
+                if(window.XMLHttpRequest){
+                    http = new XMLHttpRequest()
+                }else if(window.ActiveXObject){
+                    http = new ActiveXObject('Microsoft.XMLHTTP')
+                }
+            }
+
+    </script>
+</body>
+</html>

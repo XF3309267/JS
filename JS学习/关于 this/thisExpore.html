@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    name = "windowName"
+    function demdo(){
+      this.name = "demoName"
+      // this.sayName = function () {
+      //   console.log('sayName name')
+      //   console.log(this.name)
+      // }
+      return function () {
+        console.log('sayName name')
+        console.log(this.name)
+      }
+    }
+    function setDo(demo) {
+      setTimeout(function () {
+        console.log('setTimeout this')
+        console.log(this.name)
+        demo()
+      },1000)
+
+    }
+    let fun = demdo()
+    function ff () {
+        console.log('sayName name')
+        console.log(this.name)
+      }
+    setDo(ff)
+    console.log("$$$$$$$$$$$")
+    console.log(this.name)
+  </script>
+</body>
+</html>

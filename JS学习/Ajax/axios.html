@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            width: 200px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h2 id="show">  </h2>
+    <h2 id="show_1"></h2>
+    <div id="container">
+
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        let reader = new FileReader()
+        let res 
+        let img_container = document.querySelector('#container')
+        let img = document.querySelector('#img')
+        let img_1 = document.querySelector('#img_1')
+        let show_load_info_1 = document.querySelector('#show')
+        let show_load_info_2 = document.querySelector('#show_1')
+
+        let getUserAccount =   axios({
+                                method:'get',
+                                url:'https://images.pexels.com/photos/4608723/pexels-photo-4608723.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+                                responseType:'arraybuffer',
+                                onDownloadProgress: function (progressEvent) {
+                                    let loadInfo = 0
+                                    console.log(progressEvent.loaded/progressEvent.total)
+                                    loadInfo = parseInt(progressEvent.loaded/progressEvent.total)*100+'%'
+                                    show_load_info_1.innerHTML = loadInfo
+                                },
+                            })
+        let  getUserPermissions =  axios({
+                                method:'get',
+                                url:'https://images.pexels.com/photos/1435075/pexels-photo-1435075.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+                                responseType:'arraybuffer',
+                                onDownloadProgress: function (progressEvent) {
+                                    let loadInfo = 0
+                                    console.log(progressEvent.loaded/progressEvent.total)
+                                    loadInfo = parseInt(progressEvent.loaded/progressEvent.total)*100+'%'
+                                    show_load_info_2.innerHTML = loadInfo
+                                },
+                            })
+        
+        // function getUserAccount() {
+        //     return axios.get('https://images.pexels.com/photos/4608723/pexels-photo-4608723.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260');
+        // }
+
+        // function getUserPermissions() {
+        //     return axios.get('https://images.pexels.com/photos/1435075/pexels-photo-1435075.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+        // }
+        axios.all([getUserAccount, getUserPermissions])
+        .then(axios.spread(function (arr,arr2) {
+            // for (let i = 0; i < arguments; i++) {
+            //     const element = array[i];
+            //     let img = document.createElement('img')
+            //     img.setAttribute('src',element)
+            //     img_containers.append(img)
+            //     console.log('###')
+            // }
+            console.log(arr)
+            for (let i = 0; i < arguments.length; i++) {
+                const element = arguments[i];
+                let img = document.createElement('img')
+                let result_info = returnImgBaseInfo(element)
+                img.setAttribute('src',result_info)
+                img_container.append(img)
+            }
+            // let img = document.createElement('img')
+            // let result_info = returnImgBaseInfo(arr)
+            // img.setAttribute('src',result_info)
+            // img_container.append(img)
+
+            // let img1 = document.createElement('img')
+            // let result_info_1 = returnImgBaseInfo(arr2)
+            // img1.setAttribute('src',result_info_1)
+            // img_container.append(img1)
+        })).then();
+        function returnImgBaseInfo(response){
+            　　return 'data:image/jpg;base64,' + btoa(
+        　　　　new Uint8Array(response.data).reduce((data, byte) => data + String.fromCharCode(byte), '')
+        　　);
+        }
+        // axios({
+        //     method:'get',
+        //     url:'https://images.pexels.com/photos/4608723/pexels-photo-4608723.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+        //     responseType:'arraybuffer',
+        //     onDownloadProgress: function (progressEvent) {
+        //         let loadInfo = 0
+        //         console.log(progressEvent.loaded/progressEvent.total)
+        //         loadInfo = parseInt(progressEvent.loaded/progressEvent.total)*100+'%'
+        //         show_load_info.innerHTML = loadInfo
+        //     },
+        // })
+    //     .then(response => {
+    // 　　return 'data:image/jpg;base64,' + btoa(
+    //     　　　　new Uint8Array(response.data).reduce((data, byte) => data + String.fromCharCode(byte), '')
+    //     　　);
+    //     }).then(data => {
+    //         console.log(data)
+    //         img.setAttribute('src',data)
+    //     })
+
+        // https://cdn.jsdelivr.net/gh/XF3309267/imgs/img/3966xv.jpg
+        // https://cdn.jsdelivr.net/gh/XF3309267/imgs/css/01CSS.css
+        // https://cdn.jsdelivr.net/gh/XF3309267/JS/js/01CSS.css
+
+
+    </script>
+</body>
+</html>

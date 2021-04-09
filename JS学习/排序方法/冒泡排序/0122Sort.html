@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    text{
+      font-size: 2em;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+    <div id="divBox"> 
+       
+    </div>
+    <div id="divBox1"> 
+       
+    </div>
+  <script>
+    const divBox = document.getElementById('divBox')
+    const divBox1 = document.getElementById('divBox1')
+
+
+
+    // let adomArr = randomArr(0,20,9)
+ 
+
+    // let mergeArr = mergeSort(adomArr)
+   
+
+
+
+    
+    // 生成随机数组
+    function randomArr(min,max,arrLength=5){
+      let newArr = []
+      for (let index = 0; index < arrLength; index++) {
+        let ele = Math.random()*max + min
+        ele = parseInt(ele)
+        let textNode = document.createElement('text')
+        textNode.innerHTML = ele
+        divBox.append(textNode)
+        newArr.push(ele) 
+      }
+      return newArr
+    }
+    function showNewArr(arr){
+      for (let index = 0; index < arr.length; index++) {
+        let ele = arr[index]
+      
+        let textNode = document.createElement('text')
+        textNode.innerHTML = ele
+        divBox1.append(textNode)
+        
+      }
+    }
+
+  // function mergeSort  的用途 
+
+  // 递归方法 必须有返回值
+  //  1. 将 数组等分为 
+  //  2. 将 分开的数组排序 
+  //  返回值：  返回排序后的数组
+
+
+  // 
+
+  // 在 merge 的基础下进行封装
+  // 封装成 对一个 普通的数组进行排序
+function mergeSort(arr) {
+ let len = arr.length
+
+  let arr1 = []
+  let arr2 = []
+  if(len<2){
+    // console.log('arr.length === 1')
+    // console.log(arr)
+    // console.log('>>>>>>>>>>>')
+
+    return arr
+  }
+  if(len>=2){
+    
+
+    var middle = Math.floor(len / 2)
+    arr1 = arr.slice(0,middle)
+    arr2 = arr.slice(middle)
+    // console.log('middle--------------------------')
+    // console.log(middle)
+    // console.log('^^^^^^^^^^^^^^^^^^^')
+    // console.log('arr1: ',mergeSort(arr.slice(0,middle)))
+    // console.log('arr2: ',mergeSort(arr.slice(middle)))
+    // console.log('mergeSort(arr1)',mergeSort(arr.slice(0,middle)))
+    // console.log('mergeSort(arr2)',mergeSort(arr.slice(middle)))
+    // console.log('VVVVVVVVVVVVVV')
+    return merge( mergeSort(arr1) , mergeSort(arr2))
+  }
+ 
+  
+}
+ 
+
+// 对两个 有序的数组进行排序
+function merge(left, right) { 
+  let resultArr = []
+  while(left.length>0 && right.length>0){
+  
+    if(left[0]>right[0]){
+      resultArr.push(left.shift())
+    }else{
+      resultArr.push(right.shift())
+    }
+  }
+  while(left.length>0){
+    resultArr.push(left.shift())
+  }
+  while(right.length>0){
+    resultArr.push(right.shift())
+  }
+  console.log('------------')
+  console.log(resultArr)
+  return resultArr
+}
+let arrStart = [7,4,1,10,8]
+let finallyRes = mergeSort(arrStart)
+console.log(finallyRes)
+  </script>
+</body>
+</html>

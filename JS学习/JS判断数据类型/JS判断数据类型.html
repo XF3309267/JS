@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            1. typeof
+                用以判断 基本数据类型，
+                如： string、boolean 、 number 、 object 、 undefiend 、 function
+                ---  typeof []    >>>  object
+            2. instanceof >>  a.instanceof(b) b
+                portotype: 每个函数都有  prototype 属性，指向 其原型
+                _proto_:  每个对象都有 _proto_ 属性，指向 创建该对象的构造函数的原型
+                用于检测构造函数（b）的 prototype 属性是否出现在某个实例对象（a）的原型链，
+
+                instanceof(a,b):    
+                    a 的整个家族中 是否有 b
+                    判断依据： 实例对象 a 的 _proto_属性 是否 === b.prototype 
+
+                >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+                function isPrototype(a,b){
+                    var aProto = a._proto_;
+                    var bPrototype = b.prototype;
+                    while(true){
+                        if(aProto===null){
+                            // 即判断 a 原型是否存在
+                            return false;
+                        }
+                        if(aProto===bPrototype){
+                            // 即判断 a 的原型链中是否含有 构造函数 b 的原型
+                            return true;
+                        }
+                        // 继续向上 呈递出 a 原型 的原型
+                        // 用以下一次判断: a 的原型 的原型是否 === b 的原型
+                        aProto = a._proto_
+                    }
+                }
+
+                >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                !!!!!!!!!!!!!!!!
+                console.log('i' instanceof String);             false
+                console.log(1 instanceof Number);               false
+                console.log(true instanceof Boolean);           false
+                console.log([] instanceof Array)                true
+                console.log(function(){} instanceof Function)   true
+                console.log({} instanceof Object)               true
+                null instanceof Object                          false
+                undefined instanceof Object                     false
+                -----  Number  String Boolean 基本数据类型 用 instanceof 时
+                -----  他们 不是任何类的实例，只是基础类型的值，即   a.instanceof(all) 都为 false
+                -----  除非是用 new Number() 或者  new String() 或者 new Boolean() 创建出的 值
+
+                >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                constructor 属性
+
+                每个构造函数都有一个 prototype 属性（对应一个对象），
+                该对象中 包含一个不可枚举的属性  constructor
+                constructor属性值 是一个函数对象（ 函数对象 ？？ ）
+                指向 正式构造函数（一般指创建该对象的 构造函数）
+
+                而 实例 也有一个 constructor 属性，指向 创建该实例的 构造函数
+                作用： 可以根据 constructor 判断 实例 a 是不是 b 构造函数创建的实例
+
+                >>>   根据实例 创建一个共同基类的实例
+                function User(name){this.name}
+                var me = new User('me')
+                var you = new me.constructor('you') === new User('you')
+
+                >>>   根据实例 对基类（即 创建该 实例的 构造函数） 增加方法
+                me.constructor.prototype.sayName = function(){
+                    console.log(this.name)
+                }
+            3. constructor 检测 数据的类型
+                '1'.constructor === String          true
+                ----  Number Boolean String Object Function Array 都能检测出其数据类型
+               弊端：   constructor 是绑定在 其构造函数的 prototype 上，
+                        一旦 其 构造函数的 prototype 发生改变， 其 constructor 就变了
+        
+                <<<<<  安全的 测试方式     >>>>>>>
+            4. Object.prototype.toString.call()
+                如： Object.prototype.toString.call('aaa')   >> [object String]
+                                            null            >>  [object Null]        
+                                            undefined       >>  [object Undefined]
+
+        */
+    </script>
+</body>
+</html>

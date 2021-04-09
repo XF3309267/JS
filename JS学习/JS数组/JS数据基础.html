@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+    /*
+        JS 基础方法
+        1. 数组 转化为 字符串 >>  均返回 数组的字符串 形式 
+        toString() 、 join(arg) 、 String() 
+
+        细讲：
+        join(arg): 数组转换为字符串，数组每个元素 以 arg 间隔
+
+    */ 
+
+
+    let arr1  = [2,3,4]
+    let num =  32
+    let ele = [' str1 ',' str2 ']
+    let obj = {
+        'name': 'Jack',
+        'age': 23,
+    }
+    console.log(num.toString(16))
+    console.log(arr1.toString())
+    console.log(String(arr1))
+    console.log(JSON.stringify(obj))
+    console.log()
+    console.log(arr1.join(obj))
+
+    /*
+        2. 数组的 增删改查
+            基础的增删:
+                a. 对 数组尾部进行操作： 
+                    arrr.pop()              返回数组删除的元素              修改数组本身        
+                    arr.push( arg )         返回操作后的数组长度            修改数组本身
+                b. 对 数组首部进行操作： 
+                    arr.shift()             返回数组删除的元素              修改数组本身             
+                    arr.unshift( arg )      返回操作后的数组长度            修改数组本身
+
+            c. 数组的特殊 length 增加方式: arr[arr.length]  = 'arg'
+
+            d. 数组的特殊 delete  删除方式: delete fruits[0]
+                delete 会在数组留下 undefined
+            
+            e. splice(): 可用于 向数组添加 删除
+                arr.splice(index,num,arg1,arg2)
+                index:  操作数组的 索引开始位置(即 从 0 开始)
+                num:    从  arr[index]  开始往后要删除的个数
+                第三个参数以及之后的所有参数都是 要添加至数组的参数，从 arr[index] 开始添加至数组
+                返回 已删除的元素
+            f. slice() 截取数组     返回已截取元素，以数组返回      不改变原数组
+                arr.slice(arg1,arg2)
+                arg1: 要 截取 数组的初始位置（从 0 开始
+                arg1: 要 截取 数组的 最终位置（ 且 不包括该位置
+                ----  若方法 没有任何参数，则返回 原数组
+                <<<<<<<<<  >>>>>>>>>>>>>>>>>>>>>>
+                
+                split(arg1,arg2)： 字符串 切割成 字符串 数组
+                    arg1: 字符串以 arg1  作为'切割符' 切割
+                    arg2: 限制 切割后的数组 的长度
+                ----  若方法没有 任何参数，返回 原字符串，且是数组类型
+                
+
+        3.  数组排序 
+            a. sort( function(a,b){ return  } )  数组排序
+                sort()   返回修改后的数组   修改原数组
+                sort(arg1)  
+                    arg1：是一个方法，该方法有两个 参数 
+                    如： 
+                        function(a,b){
+                            return a-b
+                        }
+
+            ---- arr.sort() 若没有任何参数的情况：
+                    1. 若数组的元素都是字符串，则会对其排序（a-z) 返回
+                        字符串 比大小：
+                            会依次 比较 字符串的字符的 charCode,直到比出谁大谁小
+                    2. 若数组的元素不全都是 字符串，且 sort()方法中没有函数进行比较
+                    
+            
+    */
+    // let arr4 = [7,4,5]
+    // let arr41 = arr4
+    // let stra = ''
+    // let strb = ''
+    // console.log(stra==strb)
+    // arr41[0] = 'arr41'
+    // console.log(arr4)
+    // console.log(arr41)
+    function Animal(sex){
+        this.sex = sex;
+        this.saySex = saySex;
+        function saySex(){
+            console.log(this.sex)
+        }
+    }
+    function Person (name){
+        this.name = name
+        this.sayName = sayName;
+        function sayName(){
+            console.log(this.name)
+        }
+    }
+    Person.prototype = new Animal('female')
+    var p1 = new Person('Jack')
+    console.log(p1.constructor)
+    console.log(p1.constructor === Person)
+    console.log(typeof true)
+    console.log(null instanceof Object )        
+    </script>
+
+
+
+</body>
+</html>

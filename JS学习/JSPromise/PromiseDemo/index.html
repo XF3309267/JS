@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+    <p id="test-promise-log"></p>
+    <script>
+      var logging = document.getElementById('test-promise-log');
+      while (logging.children.length > 1) {
+          logging.removeChild(logging.children[logging.children.length - 1]);
+      }
+
+      // 输出log到页面:
+      function log(s) {
+          var p = document.createElement('p');
+          p.innerHTML = s;
+          logging.appendChild(p);
+      }
+      new Promise(function (resolve, reject) {
+          // log('start new Promise...');
+          var timeOut = Math.random() * 2;
+          // log('set timeout to: ' + timeOut + ' seconds.');
+          setTimeout(function () {
+              if (timeOut < 1) {
+                  // log('call resolve()...');
+                  resolve('这是成功返回的信息');
+              }
+              else {
+                  // log('call reject()...');
+                  reject('timeout in ' + timeOut + ' seconds.这是失败返回的信息');
+              }
+          }, timeOut * 1000);
+      }).then(function (r) {
+          log('Done: ' + r);
+      }).catch(function (reason) {
+          log('Failed: ' + reason);
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button type="submit" onclick="handleClick"></button>
+
+    <script>
+        let http
+        function createHttp(){
+            let http = new XMLHttpRequest()
+            if(window.ActiveXObject){
+                http = new ActiveXObject()
+            }
+            return http
+        }
+        function onreadyState(){
+            console.log(http.readyState)
+            if(http.readyState === 4){
+                console.log(4)
+                if(http.status === 200){
+                    
+                    // let blob = this.response
+                    // let img = document.createElement('img')
+                    // let img_1 = document.createElement('img')
+                    // img.onload = function(e) {
+                    //     window.URL.revokeObjectURL(img.src); 
+                    // };
+                    // img.src =  window.URL.createObjectURL(blob);
+                    // console.log(img.src)
+                    // document.body.append(img)
+                    console.log(this.response)
+                }
+            }
+        }
+        // https://cdn.jsdelivr.net/gh/XF3309267/imgs/css/01CSS.css
+
+        http = createHttp()
+        http.onreadystatechange = onreadyState
+        http.open('GET','https://cdn.jsdelivr.net/gh/XF3309267/imgs/css/01CSS.css',true)
+        http.send()
+
+
+    </script>
+</body>
+</html>
