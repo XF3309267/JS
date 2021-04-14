@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function Obj(value) {
+      this.value = value
+      this.next = null
+      this[Symbol.iterator] = function () {
+        let iterator = {
+          next: nextFun,
+          return:returnFun
+        }
+        let current = this
+
+        function returnFun(){
+          console.log('执行了 returnFun 方法')
+        }
+
+        function nextFun() {
+
+          if (current) {
+            let v = current.value
+            current = current.next
+            return {
+              value: v,
+              done: false
+            }
+          }
+          return {
+            value: undefined,
+            done: true
+          }
+        }
+        return iterator
+      }
+    }
+    let one = new Obj(1)
+    let oneIterator = one[Symbol.iterator]()
+    // console.log('oneIterator.next(): ',oneIterator.next());
+    // console.log('oneIterator.next(): ',oneIterator.next());
+    // console.log('oneIterator.next(): ',oneIterator.next());
+
+
+    
+
+
+
+    let two = new Obj(2)
+    one.next = two
+    for (const i of one) {
+      console.log('i: ',i)
+    }
+  </script>
+</body>
+
+</html>

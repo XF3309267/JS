@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    table {
+      min-width: 600px;
+      max-width: 1200px;
+      margin: 50px auto;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+
+      line-height: 2em;
+      font-size: 2em;
+      text-align: center;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+    // Map 的弊端
+    // 因为不是以 “ 字符串 - 值 ”  ，而是  “ 值 - 值 ”
+    // 就不能 按索引取值，值万一是一个  对象，就只能依照 对象的指针地址 去取值，很麻烦
+    // 说明：如果 Map 的键名 是一个对象，且后续若需要使用到 键名取值，就要将 键名 在别处重新保存一份。
+    //      
+    let heroLi = [[],[],[],[],[],[]]
+    const tableHeadNameList = [
+      [{
+          id: 0,
+          EClass: 'master',
+          className: '法师',
+          describe: '用以存放法师'
+        },
+        heroLi[0]
+      ],
+      [{
+          id: 1,
+          EClass: 'gunner',
+          className: '射手',
+          describe: '用以存放射手'
+        },
+        heroLi[1]
+      ],
+      [{
+          id: 2,
+          EClass: 'soldier',
+          className: '战士',
+          describe: '用以存放战士'
+        },
+        heroLi[2]
+
+      ],
+      [{
+          id: 3,
+          EClass: 'assassin',
+          className: '刺客',
+          describe: '用以存放刺客'
+        },
+        heroLi[3]
+      ],
+      [{
+          id: 4,
+          EClass: 'tank',
+          className: '坦克',
+          describe: '用以存放坦克'
+        },
+        heroLi[4]
+      ],
+      [{
+          id: 5,
+          EClass: 'assist',
+          className: '辅助',
+          describe: '用以存放辅助'
+        },
+        heroLi[5]
+      ],
+    ]
+    let heroList = [{
+        id: 0,
+        EClass: 'master',
+        name: "妲己",
+        BloodV: 185.4,
+        describe: '妲己向指定方向挥出灵魂冲击波，对命中的敌人造成520/585/650/715/780/845（+122%法术加成）点法术伤害'
+      },
+      {
+        id: 1,
+        EClass: 'tank',
+        name: "亚瑟",
+        BloodV: 316.3,
+        describe: '亚瑟召唤圣盾围绕自身旋转，对路径上的敌人会造成145/163/181/199/217/235（+80%物理加成）点物理伤害，圣盾最多持续5秒'
+      },
+      {
+        id: 2,
+        EClass: 'assist',
+        name: "牛魔",
+        BloodV: 352.8,
+        describe: '牛魔短暂蓄力后向指定方向以巨斧猛力劈开大地，对范围内敌人造成550/700/850（+130%物理加成）点物理伤害并将其击飞1秒；同时被劈开的大地被撕裂5秒，对处于其中的敌人每0.5秒造成80/100/120（+20%物理加成）点物理伤害并减少其50%移动速度'
+      },
+      {
+        id: 3,
+        EClass: 'soldier',
+        name: "孙悟空",
+        BloodV: 235.1,
+        describe: '孙悟空向指定方向冲锋，如果冲锋路径上遭遇敌人会借力腾空跳跃；释放普通攻击或技能可中断跳跃'
+      },
+      {
+        id: 4,
+        EClass: 'assassin',
+        name: "兰陵王",
+        BloodV: 210,
+        describe: '兰陵王开始准备并于1.5秒后进入隐身状态，持续30秒，解除隐身状态后兰陵王会增加50%攻击速度，持续5秒；隐身时若处于敌人附近超过3秒，隐身状态将会自动解除'
+      },
+      {
+        id: 5,
+        EClass: 'gunner',
+        name: "后羿",
+        BloodV: 200.3,
+        describe: '后羿命令日炙塔对指定区域进行攻击，短暂时间后召唤一束激光打击指定位置。对命中的敌人造成300/350/400/450/500/550（+50%物理加成）点法术伤害和30%减速效果，持续2秒，被中心点命中的敌人将受到额外50%的伤害且受到50%的减速效果'
+      },
+      {
+        id: 6,
+        EClass: 'soldier',
+        name: "程咬金",
+        BloodV: 369.6,
+        describe: '程咬金向指定目标位置猛力一跃并挥动双斧斩击，对范围内敌人造成120/155/190/225/260/295（+50%物理加成）点物理伤害并造成50%的减速效果，持续2秒；被动：程咬金的普通攻击命中敌方英雄会减少1秒爆裂双斧的冷却时间。'
+      },
+      {
+        id: 7,
+        EClass: 'master',
+        name: "王昭君",
+        BloodV: 167.6,
+        describe: '王昭君在指定区域引领寒霜之力，短暂延迟后将范围内敌人并造成250/280/310/340/370/400（+47%法术加成）点法术伤害并对其冰冻2.5秒；被动：王昭君对冰冻的敌人会额外造成150/175/200/225/250/275（+22%法术加成）点法术伤害。'
+      },
+    ]
+
+    // let mapInitInfo = tableHeadNameList.forEach((item,index)=>{
+    //   tableHeadInfoList[index] = 
+    // })
+    let body = document.getElementsByTagName('body')
+    let tableEle = document.createElement('table')
+    document.body.appendChild(tableEle);
+    let tr = document.createElement('tr')
+    tableEle.appendChild(tr)
+
+
+
+    // for (let i = 0; i < 4; i++) {
+    //   let td = document.createElement('th')
+    //   td.innerHTML = i
+    //   tr.appendChild(td)
+    // }
+
+
+
+    let heroListMap = new Map(tableHeadNameList)
+    let heroListArray = [...heroListMap]
+    let heroListMapkeys = [...heroListMap.keys()]
+    let heroListMapValues = [...heroListMap.values()]
+
+    heroList.forEach(item => {
+      findIndex(heroListMap, item)
+    })
+    let showTrList = pickUpHeroList(heroListMapValues)
+
+    // 初始化 table 头部
+    createTrList(heroListMapkeys)
+    showTrList.forEach(item=>{
+      createTr(item,'name')
+    })
+
+
+    // 传入一个英雄数据，插入 heroList 数据列表
+    function findIndex(heroListMap, heroItem) {
+      // let mapKeys = heroListMap.keys()
+      for (const [heroObj, heroList] of heroListMap.entries()) {
+        if (heroItem.EClass == heroObj.EClass) {
+          heroList.push(heroItem)
+        }
+      }
+    }
+
+    // 初始化 table 的头部
+    function createTrList(thList) {
+      let tr = document.createElement('tr')
+      let createEleStr = 'th'
+      let showItemStr = 'className'
+      for (let i = 0; i < thList.length; i++) {
+        const element = thList[i][showItemStr];
+        let td = document.createElement(createEleStr)
+        td.innerHTML = element
+        tr.appendChild(td)
+      }
+      tableEle.appendChild(tr)
+    }
+    // 创建 table  的 每行的数据
+    function createTr(trInfoList,showItemStr) {
+      let tr = document.createElement('tr')
+      for (let i = 0; i < trInfoList.length; i++) {
+
+        let element = trInfoList[i];
+        if(!element || !element.hasOwnProperty('name')){
+          element = {name:''}
+        }
+        let td = document.createElement('td')
+        td.innerHTML = element.name
+        tr.appendChild(td)
+      }
+      tableEle.appendChild(tr)
+    }
+    // 提取 heroList 要展示在 table 的每一行的数据，以 数组 返回
+    function pickUpHeroList(heroList){
+      // heroList: 英雄分组列表，每个元素 是一个数组，每个数组存的是不同类型的英雄
+      // heroList.length: 有几种不同的英雄
+      let resArr = []
+      // maxLength ： 即表示 要创建多少行
+      let maxLength = 0
+      for (const iterator of heroList) {
+        if(iterator.length>maxLength){
+          maxLength = iterator.length
+        }
+      }
+      for (let i = 0; i < maxLength; i++) {
+        let arr = []
+        let tr = document.createElement('tr')
+        for (let j = 0; j < heroList.length; j++) {
+          // heroList[j]:     某个类别的英雄数组
+          // heroList[j][i]:  某个类别的英雄数组 的 第 i 个元素
+          arr.push(heroList[j][i])
+        }
+        resArr.push(arr)
+      }
+      return resArr
+    }
+  </script>
+</body>
+
+</html>
